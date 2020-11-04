@@ -14,7 +14,7 @@ public class ProgramGUI {
     * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
-    public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
+    public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File file;
 
     public static void main(String[] args) {
@@ -47,7 +47,7 @@ public class ProgramGUI {
                     System.out.println(ex);
                 }
                 finally {
-                    System.out.println(file.getName());
+                    ReadSourceFile(file);
                 }
             }
         });
@@ -180,39 +180,52 @@ public class ProgramGUI {
         return null;
     }
 
-    public static int[] ReadSourceFile(File file)
+  public static HashMap<Integer, ArrayList<Integer>> ReadSourceFile(File file)
     {
         String input = null;
-        String regex =" ";
         int counter=0;
 
+        //Hashmap to store ArrayList
+        HashMap<Integer, ArrayList<Integer>> graph = new HashMap<Integer, ArrayList<Integer>>();
+        ArrayList<Integer> nodeList;
+
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
+            //Start time calculation
             long start = System.currentTimeMillis();
 
             System.out.println("File reading...");
             while ((input = br.readLine()) != null) {
-
-                //TBC
-                if (++counter==3)
+                if((input.charAt(0)-'#')!=0)
                 {
-                    //String Spilt to get totalNodeSize and totalEdgeSize
+                    String[] stringNode = input.split("\t");
+                    int startNode = Integer.parseInt(stringNode[0]);
+                    int endNode = Integer.parseInt(stringNode[1]);
 
-                    String[] sizeOutput = input.split(regex);
-                    System.out.println("Total Nodes: "+ sizeOutput[1]);
-                    System.out.println("Total Edges: "+sizeOutput[3]);
+                    nodeList = graph.get(startNode);
+                    if(nodeList == null){
+                        nodeList = new ArrayList<Integer>();
+                        nodeList.add(endNode);
+                    }else{
+                        if(!nodeList.contains(endNode))
+                            nodeList.add(endNode);
+                    }
+                   //System.out.println(startNode +" "+ endNode);
+                    graph.put(startNode, nodeList);
                 }
-                if(counter>4)
-               {
-                    String[] arrayOutput = input.split(regex);
-                    System.out.println("Start Node: "+arrayOutput[0]+" "+"End Node: "+arrayOutput[2]);
-               }
+
             }
 
+            //Stop time calculation
             long stop = System.currentTimeMillis();
             System.out.println("File Reading Time (ms): " + (stop - start));
 
+            //System.out.println(graph);
+            return graph;
+
         } catch (IOException | NumberFormatException e) {
             System.out.println("Error processing the file!");
+            return null;
         }
+
     }
 }
