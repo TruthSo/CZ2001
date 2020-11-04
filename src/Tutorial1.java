@@ -39,7 +39,7 @@ public class Tutorial1 {
             gen.nextEvents();
         gen.end();
 
-        System.out.println("====== Display Node Ids ======");
+        System.out.println("====== Display Node Idss ======");
         for(Node n:graph) {
 
             Stream<Edge> edges = n.edges();
