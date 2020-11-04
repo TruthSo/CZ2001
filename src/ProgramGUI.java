@@ -1,17 +1,17 @@
+import javax.management.StringValueExp;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class ProgramGUI {
 
     /*Set defaultDirectory
     * Change the path for defaultDirectory
-    * Windows path
-    public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
-    * Mac path
-    public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/";
-    * */
+    * Windows path: public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
+    * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
@@ -178,5 +178,41 @@ public class ProgramGUI {
             return fc.getSelectedFile();
         }
         return null;
+    }
+
+    public static int[] ReadSourceFile(File file)
+    {
+        String input = null;
+        String regex =" ";
+        int counter=0;
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
+            long start = System.currentTimeMillis();
+
+            System.out.println("File reading...");
+            while ((input = br.readLine()) != null) {
+
+                //TBC
+                if (++counter==3)
+                {
+                    //String Spilt to get totalNodeSize and totalEdgeSize
+
+                    String[] sizeOutput = input.split(regex);
+                    System.out.println("Total Nodes: "+ sizeOutput[1]);
+                    System.out.println("Total Edges: "+sizeOutput[3]);
+                }
+                if(counter>4)
+               {
+                    String[] arrayOutput = input.split(regex);
+                    System.out.println("Start Node: "+arrayOutput[0]+" "+"End Node: "+arrayOutput[2]);
+               }
+            }
+
+            long stop = System.currentTimeMillis();
+            System.out.println("File Reading Time (ms): " + (stop - start));
+
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("Error processing the file!");
+        }
     }
 }
