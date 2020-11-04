@@ -1,8 +1,21 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.*;
 
 public class ProgramGUI {
+
+    /*Set defaultDirectory
+    * Change the path for defaultDirectory
+    * Windows path
+    public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
+    * Mac path
+    public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/";
+    * */
+
+    //Windows path
+    public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
+    public static File file;
 
     public static void main(String[] args) {
         //GUI Window
@@ -20,9 +33,24 @@ public class ProgramGUI {
         graphFileName = new JTextField();
         graphFileName.setBounds(225,50,300,30);
 
+
         //Graph File Button
         JButton graphFButton = new JButton("Import Graph File");
         graphFButton.setBounds(550,50,150,30);
+        graphFButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try{
+                    file=chooseFileDialog();
+                }
+                catch(Exception ex){
+                    System.out.println(ex);
+                }
+                finally {
+                    System.out.println(file.getName());
+                }
+            }
+        });
 
         //Hospital Label
         JLabel hospitalLabel;
@@ -136,4 +164,19 @@ public class ProgramGUI {
         frame.setVisible(true);
     }
 
+    public static File chooseFileDialog() throws FileNotFoundException {
+
+        final JFileChooser fc = new JFileChooser(defaultDirectory);
+        Scanner scanner = new Scanner(System.in);
+
+        int returnVal = fc.showOpenDialog(null);
+
+        //User selected file
+        if(returnVal==JFileChooser.APPROVE_OPTION)
+        {
+            //Retrieve selected file
+            return fc.getSelectedFile();
+        }
+        return null;
+    }
 }
