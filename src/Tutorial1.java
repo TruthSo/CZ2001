@@ -19,14 +19,14 @@ public class Tutorial1 {
                     "  text-size: 30px; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: yellow;" +
                     "}" +
             "edge { " +
-                    "text-size: 20px; text-color: blue; text-padding: 5px;"
+                    "text-size: 50px; text-color: blue; text-padding: 5px;"
                     + "}" +
             "node.marked {" +
                     "	fill-color: red;" +
                     "}";
 
-    public static void main(String args[]) {
 
+    public static Graph RandomGraph(){
         System.setProperty("org.graphstream.ui", "swing");
 
         Graph graph = new SingleGraph("Random");
@@ -35,7 +35,7 @@ public class Tutorial1 {
         Generator gen = new RandomGenerator(2);
         gen.addSink(graph);
         gen.begin();
-        for(int i=0; i<5; i++)
+        for(int i=0; i<10; i++)
             gen.nextEvents();
         gen.end();
 
@@ -45,7 +45,6 @@ public class Tutorial1 {
             Stream<Edge> edges = n.edges();
             long edgesLength = edges.count();
             System.out.println("NodeId: " + n.getId() + " with edges length of " + edgesLength);
-            int mm = 0;
         }
 
         //Explicity set the weight for each edges from 1
@@ -58,8 +57,59 @@ public class Tutorial1 {
         });
 
         graph.nodes().forEach(n -> n.setAttribute("label", "Node " + n.getId()));
-        graph.edges().forEach(e -> e.setAttribute("label", "Weight: " + (int) e.getNumber("length")));
-        graph.display();
+        graph.edges().forEach(e -> e.setAttribute("label", "" + (int) e.getNumber("length")));
+        //graph.display();
+        return graph;
+    }
+
+    public static void main(String args[]) {
+
+        Graph g = RandomGraph();
+        g.display(); //false: no need to display the graph
+
+        String startNode = "0";
+        int nodeCount = g.getNodeCount();
+
+        String TargetNode = String.valueOf(((int)(Math.random() * ((nodeCount - 0) + 1))));
+
+        while(TargetNode.equals(startNode)){
+            TargetNode = String.valueOf(((int)(Math.random() * ((nodeCount - 0) + 1))));
+        }
+        System.out.println("TargetNode: " + TargetNode);
+
+        //Reference https://graphstream-project.org/doc/Algorithms/Shortest-path/Dijkstra/
+
+        // Edge lengths are stored in an attribute called "length"
+        // The length of a path is the sum of the lengths of its edges
+        Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, null, "length");
+
+        // Compute the shortest paths in g from startNode to all nodes
+        dijkstra.init(g);
+        dijkstra.setSource(g.getNode(startNode));
+        dijkstra.compute();
+
+        // Print the lengths of all the shortest paths
+        System.out.println("\n===== Length of shortest paths === ");
+        for (Node node : g)
+            System.out.printf("%s->%s:%10.2f%n", dijkstra.getSource(), node,
+                    dijkstra.getPathLength(node));
+
+        // Color in blue all the nodes on the shortest path form startNode to TargetNode
+        for (Node node : dijkstra.getPathNodes(g.getNode(TargetNode)))
+            node.setAttribute("ui.style", "fill-color: red;");
+
+
+        // Color in red all the edges in the shortest path tree
+        for (Edge edge : dijkstra.getTreeEdges())
+            edge.setAttribute("ui.style", "fill-color: red;");
+
+        // Print the shortest path from startNode to TargetNode
+        System.out.println("\nshortest path from startNode > TargetNode");
+        System.out.println(dijkstra.getPath(g.getNode(TargetNode)));
+
+        // cleanup to save memory if solutions are no longer needed
+        dijkstra.clear();
+
 
         /*
         try{
@@ -132,4 +182,8 @@ public class Tutorial1 {
         }
         */
     }
+
+
+
+
 }
