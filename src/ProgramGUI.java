@@ -16,7 +16,7 @@ public class ProgramGUI {
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File graphFile, hospitalFile;
-
+    public static JTextArea programTextArea;
     public static void main(String[] args) {
         //GUI Window
         JFrame frame = new JFrame("PT2 GrpB2 Graph Algorithm Program");
@@ -28,11 +28,10 @@ public class ProgramGUI {
         graphLabel = new JLabel("Graph File: ");
         graphLabel.setBounds(50, 50, 100, 30);
 
-        //Display Graph File Name (TextBox)
-        JTextField graphFileName;
-        graphFileName = new JTextField();
-        graphFileName.setBounds(225, 50, 300, 30);
-
+        //Display Graph File Name (Label)
+        JLabel graphFileLabel;
+        graphFileLabel = new JLabel("To be input");
+        graphFileLabel.setBounds(225, 50, 300, 30);
 
         //Graph File Button
         JButton graphFButton = new JButton("Import Graph File");
@@ -55,10 +54,10 @@ public class ProgramGUI {
         hospitalLabel = new JLabel("Hospital File: ");
         hospitalLabel.setBounds(50, 100, 100, 30);
 
-        //Display Hospital File Name (TextBox)
-        JTextField hospitalFileName;
-        hospitalFileName = new JTextField();
-        hospitalFileName.setBounds(225, 100, 300, 30);
+        //Display Hospital File Name (Label)
+        JLabel hospitalFileLabel;
+        hospitalFileLabel = new JLabel("To be input");
+        hospitalFileLabel.setBounds(225, 100, 300, 30);
 
         //Hospital File Button
         JButton hospitalFButton = new JButton("Import Hospital File");
@@ -144,16 +143,18 @@ public class ProgramGUI {
         programLabel.setBounds(725, 15, 100, 30);
 
         //Program Run Display (TextArea + ScrollPane)
-        JTextArea programTextArea = new JTextArea();
+        programTextArea = new JTextArea();
         programTextArea.setBounds(725, 45, 475, 450);
+        programTextArea.setWrapStyleWord(true);
+        programTextArea.setLineWrap(true);
 
 
         //GUI Frame Components
         frame.add(graphLabel);
-        frame.add(graphFileName);
+        frame.add(graphFileLabel);
         frame.add(graphFButton);
         frame.add(hospitalLabel);
-        frame.add(hospitalFileName);
+        frame.add(hospitalFileLabel);
         frame.add(hospitalFButton);
         frame.add(algoLabel);
         frame.add(algo1);
@@ -183,6 +184,8 @@ public class ProgramGUI {
 
         //User selected file
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+
             //Retrieve selected file
             return fc.getSelectedFile();
         }
@@ -217,6 +220,7 @@ public class ProgramGUI {
                             nodeList.add(endNode);
                     }
                     //System.out.println(startNode +" "+ endNode);
+                    programTextArea.append(startNode +" "+ endNode);
                     graph.put(startNode, nodeList);
                 }
 
@@ -240,7 +244,8 @@ public class ProgramGUI {
         String input = null;
         int counter=0;
 
-        //Hashmap to store ArrayList
+        //To store as Array
+        // Hashmap to store ArrayList
         HashMap<Integer, Integer> hospital = new HashMap<Integer, Integer>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
@@ -252,6 +257,8 @@ public class ProgramGUI {
                 if((input.charAt(0)-'#')!=0)
                 {
                     hospital.put(Integer.parseInt(input),1);
+
+                    //Change to ARRAY!!!!!!!!!!!!!
                 }
             }
 
@@ -259,7 +266,7 @@ public class ProgramGUI {
             long stop = System.currentTimeMillis();
             System.out.println("File Reading Time (ms): " + (stop - start));
 
-            System.out.println(hospital);
+            //System.out.println(hospital);
             return hospital;
 
         } catch (IOException | NumberFormatException e) {
