@@ -181,10 +181,11 @@ public class ProgramGUI {
         //programTextArea.setWrapStyleWord(true);
         //programTextArea.setLineWrap(true);
 
-        JScrollPane scrollablePTextArea = new JScrollPane(programTextArea);
+        JScrollPane scrollablePTextArea = new JScrollPane(programTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollablePTextArea.setBounds(750,45,475,460);
-        scrollablePTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollablePTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        frame.add(scrollablePTextArea);
+        //scrollablePTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //scrollablePTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         //scrollablePTextArea.setWheelScrollingEnabled(boolean);
 
 
@@ -209,8 +210,8 @@ public class ProgramGUI {
         frame.add(outputFile);
         frame.add(saveOutputButton);
         frame.add(programLabel);
-        frame.add(programTextArea);
-        frame.getContentPane().add(scrollablePTextArea);
+        //frame.add(programTextArea);
+        //frame.getContentPane().add(scrollablePTextArea);
         frame.setLayout(null);
         frame.setVisible(true);
     }
