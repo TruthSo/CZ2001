@@ -81,6 +81,8 @@ public class YJ {
         @param filepath
 
     */
+
+
     public static void main(String args[])
     {
         v = 10;
@@ -98,8 +100,16 @@ public class YJ {
 
         //Method 2: Read from file
         //String filepath = "/Users/wenjun/Desktop/CZ2001/src/input/roadNet-PA.txt";
-        String filepath = "/Users/wenjun/Desktop/CZ2001/src/input/test.txt";
-        Readfile(filepath);
+        try{
+            String filepath = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input\\test.txt";
+
+            Readfile(filepath);
+        }catch(Exception e)
+        {
+            System.out.println(e);
+
+        }
+
 
 
         HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
@@ -110,6 +120,7 @@ public class YJ {
         //Call findTopK to find the top-k's shortest path
         findTopK(compareList,setTopK);
     }
+
 
     private static void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k){
 
