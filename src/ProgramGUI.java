@@ -17,6 +17,7 @@ public class ProgramGUI {
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
+    public static String outputFileName;
 
     public static void main(String[] args) {
         //GUI Window
@@ -133,10 +134,35 @@ public class ProgramGUI {
         JTextField outputFile;
         outputFile = new JTextField();
         outputFile.setBounds(225, 400, 300, 30);
+        outputFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                outputFileName = outputFile.getText();
+            }
+        });
 
         //Generate Algorithm Button
         JButton transverseButton = new JButton("Transverse");
         transverseButton.setBounds(225, 450, 150, 30);
+        transverseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    //Add file name inside File()
+                    File outputFile = new File(outputFileName);
+                    if (outputFile.createNewFile()){
+                        System.out.println("File created: " +outputFileName);
+                    }
+                    else{
+                        System.out.println("File already exists.");
+                    }
+                }
+                catch (IOException e1){
+                    System.out.println("An error occured. File cannot be created");
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         //Program Run Label
         JLabel programLabel;
@@ -243,8 +269,7 @@ public class ProgramGUI {
         String input = null;
         int counter=0;
 
-        //To store as Array
-        // ArrayList
+        // ArrayList to store hospital node
         ArrayList<Integer> hospital = new ArrayList<Integer>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
@@ -255,7 +280,6 @@ public class ProgramGUI {
             while ((input = br.readLine()) != null) {
                 if((input.charAt(0)-'#')!=0)
                 {
-                    //hospital.put(Integer.parseInt(input),1);
                     hospital.add(Integer.parseInt(input));
                 }
             }
