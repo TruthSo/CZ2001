@@ -53,7 +53,7 @@ public class YJ {
             hm.put(j.getKey(),j.getValue().size());
         }
 
-        
+
         Map<Integer,Integer> hml = sortByValue(hm);
 
         int counter = 0;
@@ -64,7 +64,27 @@ public class YJ {
 
             System.out.println("Key = " + en.getKey() + ", Value = " + en.getValue());
 
-            System.out.println(adj.get(en.getKey()));
+            System.out.println("Resevered Arr" + adj.get(en.getKey()));
+
+            LinkedList<Integer> inversedList = adj.get(en.getKey());
+
+
+            System.out.print("Correct order of Arr: [");
+            for(int rv = inversedList.size() - 1; rv >= 0; rv--){
+                if(rv == 0){
+                    System.out.print(inversedList.get(rv));
+                }
+                else{
+                    System.out.print(inversedList.get(rv) + ",");
+                }
+            }
+            System.out.print("]\n");
+
+
+//            ListIterator<Integer> it = inversedList.listIterator(inversedList.size());
+//            while (it.hasPrevious())
+//                System.out.print(it.previous() + ",");
+
             counter++;
         }
         int mf = 0;
