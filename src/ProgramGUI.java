@@ -17,6 +17,7 @@ public class ProgramGUI {
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
+    public static String N, H, K;
 
     public static void main(String[] args) {
         //GUI Window
@@ -88,13 +89,14 @@ public class ProgramGUI {
         JRadioButton algo1 = new JRadioButton("1: BFS");
         algo1.setBounds(225, 150, 150, 30);
 
+
         //Algorithm Radio Button 2
         //JRadioButton algo2 = new JRadioButton("2: Algorithm 2");
         //algo2.setBounds(225, 180, 150, 30);
 
         //Algorithm Button Group
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(algo1);
+        //ButtonGroup bg = new ButtonGroup();
+        //bg.add(algo1);
         //bg.add(algo2);
 
         //Input Node Size Label
@@ -102,7 +104,7 @@ public class ProgramGUI {
         nSizeLabel = new JLabel("Input # of Nodes: ");
         nSizeLabel.setBounds(50, 225, 150, 30);
 
-        /*TBC*/ //Input Node Size TextBox
+        //Input Node Size TextBox
         JTextField nSizeInput;
         nSizeInput = new JTextField();
         nSizeInput.setBounds(225, 225, 150, 30);
@@ -112,7 +114,7 @@ public class ProgramGUI {
         hSizeLabel = new JLabel("Input # of Hospitals: ");
         hSizeLabel.setBounds(50, 300, 150, 30);
 
-        /*TBC*/ //Input Hospital Size TextBox
+        //Input Hospital Size TextBox
         JTextField hSizeInput;
         hSizeInput = new JTextField();
         hSizeInput.setBounds(225, 300, 150, 30);
@@ -122,7 +124,7 @@ public class ProgramGUI {
         kSizeLabel = new JLabel("Input # of Top-K Hospitals: ");
         kSizeLabel.setBounds(50, 350, 200, 30);
 
-        /*TBC*/ //Input Top K Hospital Size TextBox
+        //Input Top K Hospital Size TextBox
         JTextField kSizeInput;
         kSizeInput = new JTextField();
         kSizeInput.setBounds(225, 350, 150, 30);
@@ -146,6 +148,28 @@ public class ProgramGUI {
         //Generate Algorithm with user input
         JButton transverseButton = new JButton("Transverse");
         transverseButton.setBounds(425,400,150,30);
+        transverseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                N= nSizeInput.getText();
+                H= hSizeInput.getText();
+                K= kSizeInput.getText();
+
+                programTextArea.append("Node #: "+N+" "+"Hospital #: " + H +" "+"Top-K Hospital #: "+ K+"\n\n");
+                //To add the link to the BFS.java when completed
+
+                if(algo1.isSelected())
+                {
+                    //To call out the algo1.java class
+                    programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
+                }
+                else
+                    {
+                        programTextArea.append("Kindly select the algorithm."+"\n\n");
+                    }
+
+            }
+        });
 
         //Save output Button
         JButton saveOutputButton = new JButton("Save as File");
@@ -175,11 +199,12 @@ public class ProgramGUI {
         programLabel = new JLabel("Program Run: ");
         programLabel.setBounds(725, 15, 100, 30);
 
-        /*TBC*///Program Run Display (TextArea + ScrollPane)
+        //Program Run Display (TextArea + ScrollPane)
         programTextArea = new JTextArea();
         programTextArea.setBounds(725, 45, 475, 450);
         //programTextArea.setWrapStyleWord(true);
         //programTextArea.setLineWrap(true);
+<<<<<<< HEAD
 
         JScrollPane scrollablePTextArea = new JScrollPane(programTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollablePTextArea.setBounds(750,45,475,460);
@@ -188,6 +213,10 @@ public class ProgramGUI {
         //scrollablePTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         //scrollablePTextArea.setWheelScrollingEnabled(boolean);
 
+=======
+        JScrollPane scrollablePTextArea = new JScrollPane(programTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollablePTextArea.setBounds(750,45,475,460);
+>>>>>>> 9636e57288b9e9bf8bdbecf18e9c998c850dfc15
 
         //GUI Frame Components
         frame.add(graphLabel);
@@ -210,6 +239,10 @@ public class ProgramGUI {
         frame.add(outputFile);
         frame.add(saveOutputButton);
         frame.add(programLabel);
+<<<<<<< HEAD
+=======
+        frame.add(scrollablePTextArea);
+>>>>>>> 9636e57288b9e9bf8bdbecf18e9c998c850dfc15
         //frame.add(programTextArea);
         //frame.getContentPane().add(scrollablePTextArea);
         frame.setLayout(null);
@@ -282,6 +315,7 @@ public class ProgramGUI {
         }
 
     }
+
     public static ArrayList<Integer> readHospitalFile(File file)
     {
         String input = null;
