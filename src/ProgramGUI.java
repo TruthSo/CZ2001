@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 import java.io.IOException.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -194,8 +196,12 @@ public class ProgramGUI {
                 try {
                     O = outputFile.getText();
                     //Add file name inside File()
-                    File outputFile = new File(O);
-
+                    File outputFile = new File(O+".txt");
+                    
+                    FileWriter fileWriter = new FileWriter("C:/Users/monai/OneDrive/Documents/Github/src/"+outputFile);
+                    fileWriter.write(programTextArea.getText());
+                    fileWriter.close();
+                    
                     //To store to the path....TBC
                     if (outputFile.createNewFile()) {
                         System.out.println("File created: " + O);
