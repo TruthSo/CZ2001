@@ -85,7 +85,7 @@ public class ProgramGUI {
         algoLabel = new JLabel("Algorithm: ");
         algoLabel.setBounds(50, 150, 100, 30);
 
-        /*TBC*/ //Algorithm Radio Button 1
+        //Algorithm Radio Button 1
         JRadioButton algo1 = new JRadioButton("1: Algorithm 1");
         algo1.setBounds(225, 150, 150, 30);
 
