@@ -16,6 +16,7 @@ public class ProgramGUI {
 
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
+    public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
     public static String N, K,O;
@@ -145,32 +146,41 @@ public class ProgramGUI {
         transverseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                N= nSizeInput.getText();
-                K= kSizeInput.getText();
+               try{
+                   N= nSizeInput.getText();
+                   K= kSizeInput.getText();
 
-                programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
-                //To add the link to the BFS.java when completed
+                   programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
+                   //To add the link to the BFS.java when completed
 
-                if(algo1.isSelected())
-                {
-                    //To call out the algo1.java class
-                    programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
-                }
-                else
-                    {
-                        programTextArea.append("Kindly select the algorithm."+"\n\n");
-                    }
+                   if(algo1.isSelected())
+                   {
+                       //To call out the algo1.java class
+                       programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
 
-/*                O = outputFile.getText();
-                //Add file name inside File()
-                File outputFile = new File(O);
+                       O =outputFile.getText();
+                       //Add file name inside File()
+                       File outputFile = new File(O+".txt");
+                       FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
+                       fileWriter.close();
+                       //Check in path if file exists
+                       if(outputFile.createNewFile()){
+                           programTextArea.append("File created: "+O+".txt");
+                       }
+                       else{
+                           programTextArea.append("File already exists.");
+                       }
+                   }
+                   else
+                   {
+                       programTextArea.append("Kindly select the algorithm."+"\n\n");
+                   }
 
-                //To store to the path....TBC
-                if (outputFile.createNewFile()) {
-                    System.out.println("File created: " + O);
-                } else {
-                    System.out.println("File already exists.");
-                }*/
+               }
+               catch(IOException e1){
+                   programTextArea.append("An error occured. File cannot be created");
+                   e1.printStackTrace();
+               }
             }
         });
 
