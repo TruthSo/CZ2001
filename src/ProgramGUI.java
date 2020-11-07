@@ -2,6 +2,7 @@ import javax.management.StringValueExp;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import java.io.IOException.*;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -10,20 +11,21 @@ public class ProgramGUI {
 
     /*Set defaultDirectory
      * Change the path for defaultDirectory
-     * Windows path: public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
+     * Windows path: public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src";
      * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
+    public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
-    public static String outputFileName, test;
+    public static String N, K,O;
 
     public static void main(String[] args) {
         //GUI Window
         JFrame frame = new JFrame("PT2 GrpB2 Graph Algorithm Program");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1250, 550);
+        frame.setSize(1200, 550);
 
         //Graph Label
         JLabel graphLabel;
@@ -48,7 +50,6 @@ public class ProgramGUI {
                 } finally {
                     graphFileLabel.setText(graphFile.getName());
                     readGraphFile(graphFile);
-
                 }
             }
         });
@@ -86,102 +87,139 @@ public class ProgramGUI {
         algoLabel.setBounds(50, 150, 100, 30);
 
         //Algorithm Radio Button 1
-        JRadioButton algo1 = new JRadioButton("1: Algorithm 1");
+        JRadioButton algo1 = new JRadioButton("1: BFS");
         algo1.setBounds(225, 150, 150, 30);
 
-        /*TBC*/ //Algorithm Radio Button 2
-        JRadioButton algo2 = new JRadioButton("2: Algorithm 2");
-        algo2.setBounds(225, 180, 150, 30);
+/*      //Do not use!!
+        //Algorithm Radio Button 2
+        //JRadioButton algo2 = new JRadioButton("2: Algorithm 2");
+        //algo2.setBounds(225, 180, 150, 30);
 
         //Algorithm Button Group
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(algo1);
-        bg.add(algo2);
+        //ButtonGroup bg = new ButtonGroup();
+        //bg.add(algo1);
+        //bg.add(algo2);*/
 
         //Input Node Size Label
         JLabel nSizeLabel;
         nSizeLabel = new JLabel("Input # of Nodes: ");
-        nSizeLabel.setBounds(50, 250, 150, 30);
+        nSizeLabel.setBounds(50, 225, 150, 30);
 
-        /*TBC*/ //Input Node Size TextBox
+        //Input Node Size TextBox
         JTextField nSizeInput;
         nSizeInput = new JTextField();
-        nSizeInput.setBounds(225, 250, 150, 30);
+        nSizeInput.setBounds(225, 225, 150, 30);
 
+/*      //Do not use!!
         //Input Hospital Size Label
         JLabel hSizeLabel;
         hSizeLabel = new JLabel("Input # of Hospitals: ");
         hSizeLabel.setBounds(50, 300, 150, 30);
 
-        /*TBC*/ //Input Hospital Size TextBox
+        //Input Hospital Size TextBox
         JTextField hSizeInput;
         hSizeInput = new JTextField();
-        hSizeInput.setBounds(225, 300, 150, 30);
+        hSizeInput.setBounds(225, 300, 150, 30);*/
 
         //Input Top K Hospital Size Label
         JLabel kSizeLabel;
         kSizeLabel = new JLabel("Input # of Top-K Hospitals: ");
-        kSizeLabel.setBounds(50, 350, 200, 30);
+        kSizeLabel.setBounds(50, 275, 200, 30);
 
-        /*TBC*/ //Input Top K Hospital Size TextBox
+        //Input Top K Hospital Size TextBox
         JTextField kSizeInput;
         kSizeInput = new JTextField();
-        kSizeInput.setBounds(225, 350, 150, 30);
-
+        kSizeInput.setBounds(225, 275, 150, 30);
         //Output File Label
         JLabel outputLabel;
         outputLabel = new JLabel("Output File Name: ");
-        outputLabel.setBounds(50, 450, 200, 30);
+        outputLabel.setBounds(50, 325, 200, 30);
 
         //Output File Name (TextBox)
         JTextField outputFile;
         outputFile = new JTextField();
-        outputFile.setBounds(225, 450, 150, 30);
-/*        outputFile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                outputFileName = outputFile.getText();
-
-            }
-        });*/
+        outputFile.setBounds(225, 325, 150, 30);
 
         //Generate Algorithm with user input
         JButton transverseButton = new JButton("Transverse");
-        transverseButton.setBounds(425,400,150,30);
+        transverseButton.setBounds(425,375,150,30);
+        transverseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               try{
+                   N= nSizeInput.getText();
+                   K= kSizeInput.getText();
+                   O =outputFile.getText();
 
-        //Save output Button
+                   programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
+                   //To add the link to the BFS.java when completed
+
+                   if(algo1.isSelected())
+                   {
+                       //To call out the algo1.java class
+                       programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
+
+                       //Add file name inside File()
+                       File outputFile = new File(O+".txt");
+                       FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
+                       fileWriter.write(programTextArea.getText());
+                       fileWriter.close();
+                       //Check in path if file exists
+                       if(outputFile.createNewFile()){
+                           programTextArea.append("File created: "+O+".txt");
+                       }
+                       else{
+                           programTextArea.append("File already exists.");
+                       }
+                   }
+                   else
+                   {
+                       programTextArea.append("Kindly select the algorithm."+"\n\n");
+                   }
+
+               }
+               catch(IOException e1){
+                   programTextArea.append("An error occured. File cannot be created");
+                   e1.printStackTrace();
+               }
+            }
+        });
+
+/*        //Save output Button
         JButton saveOutputButton = new JButton("Save as File");
         saveOutputButton.setBounds(425, 450, 150, 30);
-/*        transverseButton.addActionListener(new ActionListener() {
+        saveOutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    O = outputFile.getText();
                     //Add file name inside File()
-                    File outputFile = new File(outputFileName);
-                    if (outputFile.createNewFile()){
-                        System.out.println("File created: " +outputFileName);
-                    }
-                    else{
+                    File outputFile = new File(O);
+
+                    //To store to the path....TBC
+                    if (outputFile.createNewFile()) {
+                        System.out.println("File created: " + O);
+                    } else {
                         System.out.println("File already exists.");
                     }
-                }
-                catch (IOException e1){
+                } catch (IOException e1) {
                     System.out.println("An error occured. File cannot be created");
                     e1.printStackTrace();
                 }
             }
         });*/
-
         //Program Run Label
         JLabel programLabel;
         programLabel = new JLabel("Program Run: ");
-        programLabel.setBounds(725, 15, 100, 30);
+        programLabel.setBounds(650, 15, 100, 30);
 
-        /*TBC*///Program Run Display (TextArea + ScrollPane)
+        //Program Run Display (TextArea + ScrollPane)
         programTextArea = new JTextArea();
-        programTextArea.setBounds(725, 45, 475, 450);
-        programTextArea.setWrapStyleWord(true);
-        programTextArea.setLineWrap(true);
+        programTextArea.setBounds(650, 45, 475, 450);
+        //programTextArea.setWrapStyleWord(true);
+        //programTextArea.setLineWrap(true);
+        JScrollPane scrollablePTextArea = new JScrollPane(programTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollablePTextArea.setBounds(650,45,475,460);
 
         //GUI Frame Components
         frame.add(graphLabel);
@@ -192,19 +230,21 @@ public class ProgramGUI {
         frame.add(hospitalFButton);
         frame.add(algoLabel);
         frame.add(algo1);
-        frame.add(algo2);
         frame.add(nSizeLabel);
         frame.add(nSizeInput);
-        frame.add(hSizeLabel);
-        frame.add(hSizeInput);
         frame.add(kSizeLabel);
         frame.add(kSizeInput);
         frame.add(transverseButton);
         frame.add(outputLabel);
         frame.add(outputFile);
-        frame.add(saveOutputButton);
         frame.add(programLabel);
-        frame.add(programTextArea);
+        frame.add(scrollablePTextArea);
+/*        //frame.add(hSizeLabel);
+        //frame.add(hSizeInput);
+        //frame.add(algo2);
+        //frame.add(programTextArea);
+        //frame.getContentPane().add(scrollablePTextArea);
+        // frame.add(saveOutputButton);*/
         frame.setLayout(null);
         frame.setVisible(true);
     }
@@ -218,7 +258,6 @@ public class ProgramGUI {
 
         //User selected file
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-
 
             //Retrieve selected file
             return fc.getSelectedFile();
@@ -238,7 +277,9 @@ public class ProgramGUI {
             //Start time calculation
             long start = System.currentTimeMillis();
 
-            System.out.println("File reading...");
+            programTextArea.append("File reading..."+"\n\n");
+            //System.out.println("File reading...");
+
             while ((input = br.readLine()) != null) {
                 if ((input.charAt(0) - '#') != 0) {
                     String[] stringNode = input.split("\t");
@@ -254,7 +295,7 @@ public class ProgramGUI {
                             nodeList.add(endNode);
                     }
                     //System.out.println(startNode +" "+ endNode);
-                    programTextArea.append(startNode +" "+ endNode);
+                    programTextArea.append(startNode +" "+ endNode+ "\n");
                     graph.put(startNode, nodeList);
                 }
 
@@ -262,17 +303,19 @@ public class ProgramGUI {
 
             //Stop time calculation
             long stop = System.currentTimeMillis();
-            System.out.println("File Reading Time (ms): " + (stop - start));
-
+            //System.out.println("File Reading Time (ms): " + (stop - start));
+            programTextArea.append("\n"+"File Reading Time (ms): " + (stop - start)+ "\n\n\n");
             //System.out.println(graph);
             return graph;
 
         } catch (IOException | NumberFormatException e) {
-            System.out.println("Error processing the file!");
+            //System.out.println("Error processing the file!");
+            programTextArea.append("Error processing the file!"+"\n\n\n");
             return null;
         }
 
     }
+
     public static ArrayList<Integer> readHospitalFile(File file)
     {
         String input = null;
@@ -285,23 +328,27 @@ public class ProgramGUI {
             //Start time calculation
             long start = System.currentTimeMillis();
 
-            System.out.println("File reading...");
+            //System.out.println("File reading...");
+            programTextArea.append("File reading..."+"\n\n");
             while ((input = br.readLine()) != null) {
                 if((input.charAt(0)-'#')!=0)
                 {
                     hospital.add(Integer.parseInt(input));
+                    programTextArea.append(input+ "\n");
                 }
             }
 
             //Stop time calculation
             long stop = System.currentTimeMillis();
-            System.out.println("File Reading Time (ms): " + (stop - start));
+            programTextArea.append("\n"+ "File Reading Time (ms): " + (stop - start)+"\n\n");
+            //System.out.println("File Reading Time (ms): " + (stop - start));
 
             //System.out.println(hospital);
             return hospital;
 
         } catch (IOException | NumberFormatException e) {
-            System.out.println("Error processing the file!");
+            //System.out.println("Error processing the file!");
+            programTextArea.append("Error processing the file!"+"\n\n");
             return null;
         }
 
