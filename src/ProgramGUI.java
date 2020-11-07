@@ -18,13 +18,13 @@ public class ProgramGUI {
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
-    public static String N, H, K,O;
+    public static String N, K,O;
 
     public static void main(String[] args) {
         //GUI Window
         JFrame frame = new JFrame("PT2 GrpB2 Graph Algorithm Program");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1250, 550);
+        frame.setSize(1200, 550);
 
         //Graph Label
         JLabel graphLabel;
@@ -49,7 +49,6 @@ public class ProgramGUI {
                 } finally {
                     graphFileLabel.setText(graphFile.getName());
                     readGraphFile(graphFile);
-
                 }
             }
         });
@@ -90,7 +89,7 @@ public class ProgramGUI {
         JRadioButton algo1 = new JRadioButton("1: BFS");
         algo1.setBounds(225, 150, 150, 30);
 
-
+/*      //Do not use!!
         //Algorithm Radio Button 2
         //JRadioButton algo2 = new JRadioButton("2: Algorithm 2");
         //algo2.setBounds(225, 180, 150, 30);
@@ -98,7 +97,7 @@ public class ProgramGUI {
         //Algorithm Button Group
         //ButtonGroup bg = new ButtonGroup();
         //bg.add(algo1);
-        //bg.add(algo2);
+        //bg.add(algo2);*/
 
         //Input Node Size Label
         JLabel nSizeLabel;
@@ -110,6 +109,7 @@ public class ProgramGUI {
         nSizeInput = new JTextField();
         nSizeInput.setBounds(225, 225, 150, 30);
 
+/*      //Do not use!!
         //Input Hospital Size Label
         JLabel hSizeLabel;
         hSizeLabel = new JLabel("Input # of Hospitals: ");
@@ -118,29 +118,37 @@ public class ProgramGUI {
         //Input Hospital Size TextBox
         JTextField hSizeInput;
         hSizeInput = new JTextField();
-        hSizeInput.setBounds(225, 300, 150, 30);
+        hSizeInput.setBounds(225, 300, 150, 30);*/
 
         //Input Top K Hospital Size Label
         JLabel kSizeLabel;
         kSizeLabel = new JLabel("Input # of Top-K Hospitals: ");
-        kSizeLabel.setBounds(50, 350, 200, 30);
+        kSizeLabel.setBounds(50, 275, 200, 30);
 
         //Input Top K Hospital Size TextBox
         JTextField kSizeInput;
         kSizeInput = new JTextField();
-        kSizeInput.setBounds(225, 350, 150, 30);
+        kSizeInput.setBounds(225, 275, 150, 30);
+        //Output File Label
+        JLabel outputLabel;
+        outputLabel = new JLabel("Output File Name: ");
+        outputLabel.setBounds(50, 325, 200, 30);
+
+        //Output File Name (TextBox)
+        JTextField outputFile;
+        outputFile = new JTextField();
+        outputFile.setBounds(225, 325, 150, 30);
 
         //Generate Algorithm with user input
         JButton transverseButton = new JButton("Transverse");
-        transverseButton.setBounds(425,400,150,30);
+        transverseButton.setBounds(425,375,150,30);
         transverseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 N= nSizeInput.getText();
-                H= hSizeInput.getText();
                 K= kSizeInput.getText();
 
-                programTextArea.append("Node #: "+N+" "+"Hospital #: " + H +" "+"Top-K Hospital #: "+ K+"\n\n");
+                programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
                 //To add the link to the BFS.java when completed
 
                 if(algo1.isSelected())
@@ -153,20 +161,20 @@ public class ProgramGUI {
                         programTextArea.append("Kindly select the algorithm."+"\n\n");
                     }
 
+/*                O = outputFile.getText();
+                //Add file name inside File()
+                File outputFile = new File(O);
+
+                //To store to the path....TBC
+                if (outputFile.createNewFile()) {
+                    System.out.println("File created: " + O);
+                } else {
+                    System.out.println("File already exists.");
+                }*/
             }
         });
 
-        //Output File Label
-        JLabel outputLabel;
-        outputLabel = new JLabel("Output File Name: ");
-        outputLabel.setBounds(50, 450, 200, 30);
-
-        //Output File Name (TextBox)
-        JTextField outputFile;
-        outputFile = new JTextField();
-        outputFile.setBounds(225, 450, 150, 30);
-
-        //Save output Button
+/*        //Save output Button
         JButton saveOutputButton = new JButton("Save as File");
         saveOutputButton.setBounds(425, 450, 150, 30);
         saveOutputButton.addActionListener(new ActionListener() {
@@ -188,20 +196,19 @@ public class ProgramGUI {
                     e1.printStackTrace();
                 }
             }
-        });
-
+        });*/
         //Program Run Label
         JLabel programLabel;
         programLabel = new JLabel("Program Run: ");
-        programLabel.setBounds(725, 15, 100, 30);
+        programLabel.setBounds(650, 15, 100, 30);
 
         //Program Run Display (TextArea + ScrollPane)
         programTextArea = new JTextArea();
-        programTextArea.setBounds(725, 45, 475, 450);
+        programTextArea.setBounds(650, 45, 475, 450);
         //programTextArea.setWrapStyleWord(true);
         //programTextArea.setLineWrap(true);
         JScrollPane scrollablePTextArea = new JScrollPane(programTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollablePTextArea.setBounds(750,45,475,460);
+        scrollablePTextArea.setBounds(650,45,475,460);
 
         //GUI Frame Components
         frame.add(graphLabel);
@@ -212,21 +219,21 @@ public class ProgramGUI {
         frame.add(hospitalFButton);
         frame.add(algoLabel);
         frame.add(algo1);
-        //frame.add(algo2);
         frame.add(nSizeLabel);
         frame.add(nSizeInput);
-        frame.add(hSizeLabel);
-        frame.add(hSizeInput);
         frame.add(kSizeLabel);
         frame.add(kSizeInput);
         frame.add(transverseButton);
         frame.add(outputLabel);
         frame.add(outputFile);
-        frame.add(saveOutputButton);
         frame.add(programLabel);
         frame.add(scrollablePTextArea);
+/*        //frame.add(hSizeLabel);
+        //frame.add(hSizeInput);
+        //frame.add(algo2);
         //frame.add(programTextArea);
         //frame.getContentPane().add(scrollablePTextArea);
+        // frame.add(saveOutputButton);*/
         frame.setLayout(null);
         frame.setVisible(true);
     }
