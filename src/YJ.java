@@ -83,7 +83,7 @@ public class YJ {
     */
     public static void main(String args[])
     {
-        v = 10;
+        v = 4;
         int source = 1;
         int[] hNodes = new int[]{ 9, 6,8, 2};
         int setTopK = 3;
@@ -141,19 +141,23 @@ public class YJ {
 
             LinkedList<Integer> inversedList = adj.get(en.getKey());
 
-            System.out.print("[");
-            for(int rv = inversedList.size() - 1; rv >= 0; rv--){
-                if(rv == 0){
-                    System.out.print(inversedList.get(rv));
-                }
-                else{
-                    System.out.print(inversedList.get(rv) + ",");
-                }
-            }
-            System.out.print("]\n");
-            System.out.println("===================");
+            boolean checkEmptyPath = en.getValue() != 0;
 
-            counter++;
+            if(checkEmptyPath){
+                System.out.print("[");
+                for(int rv = inversedList.size() - 1; rv >= 0; rv--){
+                    if(rv == 0){
+                        System.out.print(inversedList.get(rv));
+                    }
+                    else{
+                        System.out.print(inversedList.get(rv) + ",");
+                    }
+                }
+                System.out.print("]\n");
+                System.out.println("===================");
+
+                counter++;
+            }
         }
     }
 
