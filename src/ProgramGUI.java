@@ -17,6 +17,7 @@ public class ProgramGUI {
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
+
     public static void main(String[] args) {
         //GUI Window
         JFrame frame = new JFrame("PT2 GrpB2 Graph Algorithm Program");
@@ -28,7 +29,7 @@ public class ProgramGUI {
         graphLabel = new JLabel("Graph File: ");
         graphLabel.setBounds(50, 50, 100, 30);
 
-        //Display Graph File Name (Label)
+        /*TBC*/ //Display Graph File Name (Label)
         JLabel graphFileLabel;
         graphFileLabel = new JLabel("To be input");
         graphFileLabel.setBounds(225, 50, 300, 30);
@@ -54,7 +55,7 @@ public class ProgramGUI {
         hospitalLabel = new JLabel("Hospital File: ");
         hospitalLabel.setBounds(50, 100, 100, 30);
 
-        //Display Hospital File Name (Label)
+        /*TBC*/ //Display Hospital File Name (Label)
         JLabel hospitalFileLabel;
         hospitalFileLabel = new JLabel("To be input");
         hospitalFileLabel.setBounds(225, 100, 300, 30);
@@ -80,11 +81,11 @@ public class ProgramGUI {
         algoLabel = new JLabel("Algorithm: ");
         algoLabel.setBounds(50, 150, 100, 30);
 
-        //Algorithm Radio Button 1
+        /*TBC*/ //Algorithm Radio Button 1
         JRadioButton algo1 = new JRadioButton("1: Algorithm 1");
         algo1.setBounds(225, 150, 150, 30);
 
-        //Algorithm Radio Button 2
+        /*TBC*/ //Algorithm Radio Button 2
         JRadioButton algo2 = new JRadioButton("2: Algorithm 2");
         algo2.setBounds(225, 180, 150, 30);
 
@@ -98,7 +99,7 @@ public class ProgramGUI {
         nSizeLabel = new JLabel("Input # of Nodes: ");
         nSizeLabel.setBounds(50, 250, 150, 30);
 
-        //Input Node Size TextBox
+        /*TBC*/ //Input Node Size TextBox
         JTextField nSizeInput;
         nSizeInput = new JTextField();
         nSizeInput.setBounds(225, 250, 150, 30);
@@ -108,7 +109,7 @@ public class ProgramGUI {
         hSizeLabel = new JLabel("Input # of Hospitals: ");
         hSizeLabel.setBounds(50, 300, 150, 30);
 
-        //Input Hospital Size TextBox
+        /*TBC*/ //Input Hospital Size TextBox
         JTextField hSizeInput;
         hSizeInput = new JTextField();
         hSizeInput.setBounds(225, 300, 150, 30);
@@ -118,7 +119,7 @@ public class ProgramGUI {
         kSizeLabel = new JLabel("Input # of Top-K Hospitals: ");
         kSizeLabel.setBounds(50, 350, 200, 30);
 
-        //Input Top K Hospital Size TextBox
+        /*TBC*/ //Input Top K Hospital Size TextBox
         JTextField kSizeInput;
         kSizeInput = new JTextField();
         kSizeInput.setBounds(225, 350, 150, 30);
@@ -142,12 +143,11 @@ public class ProgramGUI {
         programLabel = new JLabel("Program Run: ");
         programLabel.setBounds(725, 15, 100, 30);
 
-        //Program Run Display (TextArea + ScrollPane)
+        /*TBC*///Program Run Display (TextArea + ScrollPane)
         programTextArea = new JTextArea();
         programTextArea.setBounds(725, 45, 475, 450);
         programTextArea.setWrapStyleWord(true);
         programTextArea.setLineWrap(true);
-
 
         //GUI Frame Components
         frame.add(graphLabel);
@@ -170,7 +170,6 @@ public class ProgramGUI {
         frame.add(transverseButton);
         frame.add(programLabel);
         frame.add(programTextArea);
-
         frame.setLayout(null);
         frame.setVisible(true);
     }
@@ -239,14 +238,14 @@ public class ProgramGUI {
         }
 
     }
-    public static HashMap<Integer, Integer> readHospitalFile(File file)
+    public static ArrayList<Integer> readHospitalFile(File file)
     {
         String input = null;
         int counter=0;
 
         //To store as Array
-        // Hashmap to store ArrayList
-        HashMap<Integer, Integer> hospital = new HashMap<Integer, Integer>();
+        // ArrayList
+        ArrayList<Integer> hospital = new ArrayList<Integer>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
             //Start time calculation
@@ -256,9 +255,8 @@ public class ProgramGUI {
             while ((input = br.readLine()) != null) {
                 if((input.charAt(0)-'#')!=0)
                 {
-                    hospital.put(Integer.parseInt(input),1);
-
-                    //Change to ARRAY!!!!!!!!!!!!!
+                    //hospital.put(Integer.parseInt(input),1);
+                    hospital.add(Integer.parseInt(input));
                 }
             }
 
