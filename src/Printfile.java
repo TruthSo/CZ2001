@@ -8,7 +8,7 @@ class Printfile
     public static void main(String[] args)
     {
 
-        String rootDir = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input\\hospital-PA.txt";
+        String rootDir = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input\\";
 
 
         Queue<File> queue = new LinkedList<>();
@@ -28,6 +28,7 @@ class Printfile
 
             if (listOfFilesAndDirectory != null)
             {
+
 
                 for (File file : listOfFilesAndDirectory)
                 {
