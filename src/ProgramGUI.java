@@ -2,6 +2,7 @@ import javax.management.StringValueExp;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import java.io.IOException.*;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -10,14 +11,14 @@ public class ProgramGUI {
 
     /*Set defaultDirectory
      * Change the path for defaultDirectory
-     * Windows path: public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\";
+     * Windows path: public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src";
      * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
-    public static String N, H, K;
+    public static String N, H, K,O;
 
     public static void main(String[] args) {
         //GUI Window
@@ -129,22 +130,6 @@ public class ProgramGUI {
         kSizeInput = new JTextField();
         kSizeInput.setBounds(225, 350, 150, 30);
 
-        //Output File Label
-        JLabel outputLabel;
-        outputLabel = new JLabel("Output File Name: ");
-        outputLabel.setBounds(50, 450, 200, 30);
-
-        //Output File Name (TextBox)
-        JTextField outputFile;
-        outputFile = new JTextField();
-        outputFile.setBounds(225, 450, 150, 30);
-/*      outputFile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                outputFileName = outputFile.getText();
-            }
-        });*/
-
         //Generate Algorithm with user input
         JButton transverseButton = new JButton("Transverse");
         transverseButton.setBounds(425,400,150,30);
@@ -171,28 +156,39 @@ public class ProgramGUI {
             }
         });
 
+        //Output File Label
+        JLabel outputLabel;
+        outputLabel = new JLabel("Output File Name: ");
+        outputLabel.setBounds(50, 450, 200, 30);
+
+        //Output File Name (TextBox)
+        JTextField outputFile;
+        outputFile = new JTextField();
+        outputFile.setBounds(225, 450, 150, 30);
+
         //Save output Button
         JButton saveOutputButton = new JButton("Save as File");
         saveOutputButton.setBounds(425, 450, 150, 30);
-/*      transverseButton.addActionListener(new ActionListener() {
+        saveOutputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    O = outputFile.getText();
                     //Add file name inside File()
-                    File outputFile = new File(outputFileName);
-                    if (outputFile.createNewFile()){
-                        System.out.println("File created: " +outputFileName);
-                    }
-                    else{
+                    File outputFile = new File(O);
+
+                    //To store to the path....TBC
+                    if (outputFile.createNewFile()) {
+                        System.out.println("File created: " + O);
+                    } else {
                         System.out.println("File already exists.");
                     }
-                }
-                catch (IOException e1){
+                } catch (IOException e1) {
                     System.out.println("An error occured. File cannot be created");
                     e1.printStackTrace();
                 }
             }
-        });*/
+        });
 
         //Program Run Label
         JLabel programLabel;
