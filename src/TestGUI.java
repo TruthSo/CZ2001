@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class ProgramGUI {
+public class TestGUI {
 
     /*Set defaultDirectory
      * Change the path for defaultDirectory
