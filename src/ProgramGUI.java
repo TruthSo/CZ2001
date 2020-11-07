@@ -17,7 +17,7 @@ public class ProgramGUI {
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
-    public static String outputFileName;
+    public static String outputFileName, test;
 
     public static void main(String[] args) {
         //GUI Window
@@ -30,14 +30,14 @@ public class ProgramGUI {
         graphLabel = new JLabel("Graph File: ");
         graphLabel.setBounds(50, 50, 100, 30);
 
-        /*TBC*/ //Display Graph File Name (Label)
+        //Display Graph File Name (Label)
         JLabel graphFileLabel;
-        graphFileLabel = new JLabel("To be input");
+        graphFileLabel = new JLabel();
         graphFileLabel.setBounds(225, 50, 300, 30);
 
         //Graph File Button
         JButton graphFButton = new JButton("Import Graph File");
-        graphFButton.setBounds(550, 50, 150, 30);
+        graphFButton.setBounds(425, 50, 150, 30);
         graphFButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,7 +46,9 @@ public class ProgramGUI {
                 } catch (Exception ex) {
                     System.out.println(ex);
                 } finally {
+                    graphFileLabel.setText(graphFile.getName());
                     readGraphFile(graphFile);
+
                 }
             }
         });
@@ -56,14 +58,14 @@ public class ProgramGUI {
         hospitalLabel = new JLabel("Hospital File: ");
         hospitalLabel.setBounds(50, 100, 100, 30);
 
-        /*TBC*/ //Display Hospital File Name (Label)
+        //Display Hospital File Name (Label)
         JLabel hospitalFileLabel;
-        hospitalFileLabel = new JLabel("To be input");
+        hospitalFileLabel = new JLabel();
         hospitalFileLabel.setBounds(225, 100, 300, 30);
 
         //Hospital File Button
         JButton hospitalFButton = new JButton("Import Hospital File");
-        hospitalFButton.setBounds(550, 100, 150, 30);
+        hospitalFButton.setBounds(425, 100, 150, 30);
         hospitalFButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,6 +74,7 @@ public class ProgramGUI {
                 } catch (Exception ex) {
                     System.out.println(ex);
                 } finally {
+                    hospitalFileLabel.setText(hospitalFile.getName());
                     readHospitalFile(hospitalFile);
                 }
             }
@@ -128,23 +131,28 @@ public class ProgramGUI {
         //Output File Label
         JLabel outputLabel;
         outputLabel = new JLabel("Output File Name: ");
-        outputLabel.setBounds(50, 400, 200, 30);
+        outputLabel.setBounds(50, 450, 200, 30);
 
         //Output File Name (TextBox)
         JTextField outputFile;
         outputFile = new JTextField();
-        outputFile.setBounds(225, 400, 300, 30);
-        outputFile.addActionListener(new ActionListener() {
+        outputFile.setBounds(225, 450, 150, 30);
+/*        outputFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 outputFileName = outputFile.getText();
-            }
-        });
 
-        //Generate Algorithm Button
+            }
+        });*/
+
+        //Generate Algorithm with user input
         JButton transverseButton = new JButton("Transverse");
-        transverseButton.setBounds(225, 450, 150, 30);
-        transverseButton.addActionListener(new ActionListener() {
+        transverseButton.setBounds(425,400,150,30);
+
+        //Save output Button
+        JButton saveOutputButton = new JButton("Save as File");
+        saveOutputButton.setBounds(425, 450, 150, 30);
+/*        transverseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -162,7 +170,7 @@ public class ProgramGUI {
                     e1.printStackTrace();
                 }
             }
-        });
+        });*/
 
         //Program Run Label
         JLabel programLabel;
@@ -191,9 +199,10 @@ public class ProgramGUI {
         frame.add(hSizeInput);
         frame.add(kSizeLabel);
         frame.add(kSizeInput);
+        frame.add(transverseButton);
         frame.add(outputLabel);
         frame.add(outputFile);
-        frame.add(transverseButton);
+        frame.add(saveOutputButton);
         frame.add(programLabel);
         frame.add(programTextArea);
         frame.setLayout(null);
