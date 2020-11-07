@@ -149,6 +149,7 @@ public class ProgramGUI {
                try{
                    N= nSizeInput.getText();
                    K= kSizeInput.getText();
+                   O =outputFile.getText();
 
                    programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
                    //To add the link to the BFS.java when completed
@@ -158,10 +159,10 @@ public class ProgramGUI {
                        //To call out the algo1.java class
                        programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
 
-                       O =outputFile.getText();
                        //Add file name inside File()
                        File outputFile = new File(O+".txt");
                        FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
+                       fileWriter.write(programTextArea.getText());
                        fileWriter.close();
                        //Check in path if file exists
                        if(outputFile.createNewFile()){
