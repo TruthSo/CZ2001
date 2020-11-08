@@ -22,6 +22,7 @@ public class ProgramGUI {
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
     public static String N, K,O;
+    public static ArrayList<Integer> HospitalNodes;
 
     public static void main(String[] args) {
         //GUI Window
@@ -78,7 +79,7 @@ public class ProgramGUI {
                     System.out.println(ex);
                 } finally {
                     hospitalFileLabel.setText(hospitalFile.getName());
-                    readHospitalFile(hospitalFile);
+                    HospitalNodes = readHospitalFile(hospitalFile);
                 }
             }
         });
@@ -89,18 +90,18 @@ public class ProgramGUI {
         algoLabel.setBounds(50, 150, 100, 30);
 
         //Algorithm Radio Button 1
-        JRadioButton algo1 = new JRadioButton("1: BFS");
-        algo1.setBounds(225, 150, 150, 30);
+        JRadioButton algo1 = new JRadioButton("1: Random Graph");
+        algo1.setBounds(225, 150, 200, 30);
 
-/*      //Do not use!!
+        //Do not use!!
         //Algorithm Radio Button 2
-        //JRadioButton algo2 = new JRadioButton("2: Algorithm 2");
-        //algo2.setBounds(225, 180, 150, 30);
+        JRadioButton algo2 = new JRadioButton("2: Real Network Graph");
+        algo2.setBounds(225, 180, 200, 30);
 
         //Algorithm Button Group
-        //ButtonGroup bg = new ButtonGroup();
-        //bg.add(algo1);
-        //bg.add(algo2);*/
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(algo1);
+        bg.add(algo2);
 
         //Input Node Size Label
         JLabel nSizeLabel;
@@ -156,6 +157,7 @@ public class ProgramGUI {
                    programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
                    //To add the link to the BFS.java when completed
 
+                   int selectedAlgoOption = -1;
                    if(algo1.isSelected())
                    {
                        //To call out the algo1.java class
@@ -173,12 +175,29 @@ public class ProgramGUI {
                        else{
                            programTextArea.append("File already exists.");
                        }
+                       selectedAlgoOption = 0;
+                       System.out.println("Selected Algo 1");
+                   }
+                   else if (algo2.isSelected()){
+                       selectedAlgoOption = 1;
+                       System.out.println("Selected Algo 2");
                    }
                    else
                    {
                        programTextArea.append("Kindly select the algorithm."+"\n\n");
                    }
 
+
+                   System.out.println("Num of Nodes: " + N);
+                   YJ BFS = new YJ(Integer.parseInt(N));
+                   //BFS.setV(Integer.parseInt(N));       //Set the num of Vertice
+
+                   BFS.setSource(0);  //Set the source NodeId
+                   BFS.setTopK(Integer.parseInt(K));    //Set the top-k's shortest path
+                   BFS.setAlgoOption(selectedAlgoOption);
+                   BFS.sethNodes(HospitalNodes);
+
+                   BFS.executeBFS();
                }
                catch(IOException e1){
                    programTextArea.append("An error occured. File cannot be created");
@@ -244,15 +263,17 @@ public class ProgramGUI {
         frame.add(outputLabel);
         frame.add(outputFile);
         frame.add(programLabel);
+        frame.add(algo2);
         frame.add(scrollablePTextArea);
 /*        //frame.add(hSizeLabel);
         //frame.add(hSizeInput);
-        //frame.add(algo2);
+
         //frame.add(programTextArea);
         //frame.getContentPane().add(scrollablePTextArea);
         // frame.add(saveOutputButton);*/
         frame.setLayout(null);
         frame.setVisible(true);
+
     }
 
     public static File chooseFileDialog() throws FileNotFoundException {
