@@ -1,3 +1,4 @@
+/*
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 import org.graphstream.algorithm.generator.*;
@@ -111,7 +112,8 @@ public class Tutorial1 {
         dijkstra.clear();
 
 
-        /*
+        */
+/*
         try{
             int rowNo = 1;
             int totalNodes = 0;
@@ -180,10 +182,11 @@ public class Tutorial1 {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        */
+        *//*
+
     }
 
 
 
 
-}
+}*/
