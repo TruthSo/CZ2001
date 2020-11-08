@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.function.DoubleToIntFunction;
 
 public class YJ {
 
@@ -10,58 +11,14 @@ public class YJ {
     private int source = 0;
     private int topK = 0;
     private ArrayList<Integer> hNodes = new ArrayList<Integer>();
-    private HashMap<Integer, ArrayList<Integer>> RoadNodes;
     private String filepath;
-
-
-
+    private ArrayList<String> outputFileStr = new ArrayList<String>();
+    private HashMap<Integer, ArrayList<Integer>> RoadNodes;
     //getRandomInteger: to get a Random Num
     public static int getRandomInteger(int maximum, int minimum){
         return ((int) (Math.random()*(maximum - minimum))) + minimum;
     }
 
-    public void Readfile(ArrayList<ArrayList<Integer>> filepath){
-        try{
-            File myObj = new File(String.valueOf(filepath));
-            Scanner myReader = new Scanner(myObj);
-
-            int rowNo = 1;
-            int totalEdges = 0;
-
-            while (myReader.hasNextLine() && rowNo < 100){
-                String data = myReader.nextLine();
-                if(rowNo == 3 || rowNo > 4) {
-                    String[] intParts = data.split("\\s+");
-
-                    if (rowNo == 3) {
-                        //totalNodes = Integer.parseInt(intParts[2]);
-                        //totalEdges = Integer.parseInt(intParts[4]);
-
-                        //keys = new int[totalNodes];
-                    } else if (intParts.length == 2) {
-                        //System.out.println("data: " + data);
-
-                        Integer FromNode = Integer.parseInt(intParts[0]);
-                        Integer ToNode = Integer.parseInt(intParts[1]);
-                        System.out.println("From [" + FromNode + "] : To [" + ToNode + "]");
-
-//                        var aa = getAdj();
-//                        addEdge(aa, FromNode, ToNode);
-                        totalEdges++;
-                    }
-
-                }
-                rowNo++;
-            }
-            //System.out.println("totalNodes: " + totalNodes);
-            System.out.println("totalEdges: " + totalEdges);
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-
-    }
 
     public void RandomGraph(int totalnodes){
         for(int i = 0; i < totalnodes;i++){
@@ -89,51 +46,17 @@ public class YJ {
             //addEdge(ArrayList(), fromNode, toNode);
         }
 
-        }
+    }
+
 
     /*
-            @param v = specify the max NodeId.
-            Eg: v = 10 is equals to 0 ~ 10
-
-            @param source: start Node
-
-            @param hNodes: list of Hospital nodes
-
-            @param setTopK: Set for top-k shortest path
-
-            @param filepath: file path for reading input
-
-        */
-    public static void main(String args[])
-    {
-        //v = 4;
-        //int source = 1;
-        //int[] hNodes = new int[]{ 9, 6,8, 2};
-        //int setTopK = 3;
-
-        //Initialize the adjacency list
-//        for (int i = 0; i < v; i++) {
-//            adj.add(new ArrayList<Integer>());
-//        }
-
-        //Method 1: RandomGraph
-        //RandomGraph(v);
-
-        //Method 2: Read from file
-        //String filepath = "/Users/wenjun/Desktop/CZ2001/src/input/roadNet-PA.txt";
-//        String filepath = "/Users/wenjun/Desktop/CZ2001/src/input/test.txt";
-//        Readfile(filepath);
-//
-//        HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
-//
-//
-//        for(int i : gethNodes){
-//            compareList.put(i, printShortestDistance(adj, source, i, v));
-//        }
-//
-//        //Call findTopK to find the top-k's shortest path
-//        findTopK(compareList,setTopK);
-    }
+        @param v = specify the max NodeId.
+        Eg: v = 10 is equals to 0 ~ 10
+        @param source: start Node
+        @param hNodes: list of Hospital nodes
+        @param setTopK: Set for top-k shortest path
+        @param filepath: file path for reading input
+    */
 
     private void init(){
 
@@ -172,7 +95,6 @@ public class YJ {
     public HashMap<Integer, ArrayList<Integer>> getRoadNodes(){
         return this.RoadNodes;
     }
-
     public void setRoadNodes(HashMap<Integer, ArrayList<Integer>> roadNotes) {
         this.RoadNodes = roadNotes;
     }
@@ -190,6 +112,14 @@ public class YJ {
         this.topK = topK;
     }
 
+    public ArrayList<String> getOutputFileStr() {
+        return outputFileStr;
+    }
+
+    public void setOutputFileStr(ArrayList<String> outputFileStr) {
+        this.outputFileStr = outputFileStr;
+    }
+
     public YJ(int vertices) {
         setV(vertices);
         init();
@@ -204,13 +134,10 @@ public class YJ {
 
         //Method 2: ReadFile
         else if(this.algoOption == 1){
-
             var ss = getRoadNodes();
             System.out.println("YJ.java run ReadFile()");
             ReadRoadNodes(ss);
-
         }
-
 
         HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
 
@@ -220,13 +147,14 @@ public class YJ {
         }
 
         //Call findTopK to find the top-k's shortest path
-        return findTopK(compareList,getTopK());
+        findTopK(compareList,getTopK());
+
+        return getOutputFileStr();
     }
 
-
-    private ArrayList<String> findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
+    private void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
     {
-        ArrayList<String> stpList = new ArrayList<String>();
+        //ArrayList<String> stpList = new ArrayList<String>();
         HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
 
         System.out.println(" ");
@@ -238,11 +166,12 @@ public class YJ {
 
         int counter = 0;
 
-        System.out.println("===================");
-        System.out.println("Top " + k + "'s shortest path: ");
-        System.out.println("===================");
+        String pathOutput = "";
+        String LabelTopK = "Top " + k + "'s shortest path for ";
 
-        //ProgramGUI programGUI = new ProgramGUI();
+        pathOutput += LabelTopK;
+        System.out.println(LabelTopK);
+
 
         for (Map.Entry<Integer, Integer> en : hml.entrySet()) {
             if(counter >= k){
@@ -254,8 +183,12 @@ public class YJ {
             boolean checkEmptyPath = en.getValue() != 0;
 
             if(checkEmptyPath){
-                String pathOutput = "[";
+                String HospitalLabel = "hospital NodeId [" + en.getKey() + "]";
+                pathOutput += HospitalLabel + "\n[";
+
+                System.out.println(HospitalLabel);
                 System.out.print("[");
+
                 for(int rv = inversedList.size() - 1; rv >= 0; rv--){
                     if(rv == 0){
                         System.out.print(inversedList.get(rv));
@@ -266,15 +199,25 @@ public class YJ {
                         pathOutput+= inversedList.get(rv) + ",";
                     }
                 }
-                System.out.print("]\n");
-                pathOutput+= "]\n";
-                System.out.println("===================");
+
+                String label_end = "]\n";
+                String label_endB = "===================";
+
+                pathOutput+= label_end;
+                pathOutput+= label_endB;
+
+                System.out.print(label_end);
+                System.out.println(label_endB);
 
                 counter++;
-                stpList.add(pathOutput);
+                outputFileStr.add(pathOutput);
             }
+
         }
-        return stpList;
+
+        if(outputFileStr.size() == 0){
+            outputFileStr.add("empty path ! Please tranverse the program again.");
+        }
     }
 
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
@@ -371,6 +314,47 @@ public class YJ {
         }
         return false;
     }
+    public void Readfile(String filepath){
+        try{
+            File myObj = new File(filepath);
+            Scanner myReader = new Scanner(myObj);
+
+            int rowNo = 1;
+            int totalEdges = 0;
+
+            while (myReader.hasNextLine() && rowNo < 100){
+                String data = myReader.nextLine();
+                if(rowNo == 3 || rowNo > 4) {
+                    String[] intParts = data.split("\\s+");
+
+                    if (rowNo == 3) {
+                        //totalNodes = Integer.parseInt(intParts[2]);
+                        //totalEdges = Integer.parseInt(intParts[4]);
+
+                        //keys = new int[totalNodes];
+                    } else if (intParts.length == 2) {
+                        //System.out.println("data: " + data);
+
+                        Integer FromNode = Integer.parseInt(intParts[0]);
+                        Integer ToNode = Integer.parseInt(intParts[1]);
+                        System.out.println("From [" + FromNode + "] : To [" + ToNode + "]");
+
+//                        var aa = getAdj();
+//                        addEdge(aa, FromNode, ToNode);
+                        totalEdges++;
+                    }
+
+                }
+                rowNo++;
+            }
+            //System.out.println("totalNodes: " + totalNodes);
+            System.out.println("totalEdges: " + totalEdges);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
 }
-
-
