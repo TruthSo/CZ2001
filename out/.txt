@@ -13896,7 +13896,7 @@ File reading...
 6402 6402
 6416 6416
 
-File Reading Time (ms): 702
+File Reading Time (ms): 687
 
 
 File reading...
@@ -14051,9 +14051,39 @@ File reading...
 107
 100
 
-File Reading Time (ms): 16
+File Reading Time (ms): 13
 
-Node #: 8 Top-K Hospital #: 2
+Node #: 6000 Top-K Hospital #: 5
+
+Running Algorithm - 2: Real Network Graph
+
+File already exists.File reading...
+
+0 1
+0 2
+0 3
+1 0
+1 3
+2 3
+2 0
+3 1
+3 0
+3 2
+
+File Reading Time (ms): 1
+
+
+File reading...
+
+0
+1
+6353
+6309
+309
+
+File Reading Time (ms): 1
+
+Node #: 6 Top-K Hospital #: 2
 
 Running Algorithm - 2: Real Network Graph
 
