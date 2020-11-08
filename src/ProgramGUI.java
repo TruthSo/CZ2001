@@ -18,7 +18,7 @@ public class ProgramGUI {
 
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
-    public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
+    public static String outputDirectory = "/Users/wenjun/Desktop/CZ2001_Mindy/Output/";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
     public static String N, K,O;
@@ -154,6 +154,11 @@ public class ProgramGUI {
                    K= kSizeInput.getText();
                    O =outputFile.getText();
 
+                   //Add file name inside File()
+                   File outputFile = new File(O+".txt");
+                   FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
+                   //fileWriter.write(programTextArea.getText());
+
                    programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
                    //To add the link to the BFS.java when completed
 
@@ -163,11 +168,6 @@ public class ProgramGUI {
                        //To call out the algo1.java class
                        programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
 
-                       //Add file name inside File()
-                       File outputFile = new File(O+".txt");
-                       FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
-                       fileWriter.write(programTextArea.getText());
-                       fileWriter.close();
                        //Check in path if file exists
                        if(outputFile.createNewFile()){
                            programTextArea.append("File created: "+O+".txt");
@@ -201,7 +201,9 @@ public class ProgramGUI {
                    //Print out all the shortest paths
                    for(String output : StpList){
                        programTextArea.append(output);
+                       fileWriter.write(output);
                    }
+                   fileWriter.close();
                }
                catch(IOException e1){
                    programTextArea.append("An error occured. File cannot be created");

@@ -12,6 +12,7 @@ public class YJ {
     private int topK = 0;
     private ArrayList<Integer> hNodes = new ArrayList<Integer>();
     private String filepath;
+    private ArrayList<String> outputFileStr = new ArrayList<String>();
 
     //getRandomInteger: to get a Random Num
     public static int getRandomInteger(int maximum, int minimum){
@@ -74,18 +75,18 @@ public class YJ {
 
 
     /*
-            @param v = specify the max NodeId.
-            Eg: v = 10 is equals to 0 ~ 10
+        @param v = specify the max NodeId.
+        Eg: v = 10 is equals to 0 ~ 10
 
-            @param source: start Node
+        @param source: start Node
 
-            @param hNodes: list of Hospital nodes
+        @param hNodes: list of Hospital nodes
 
-            @param setTopK: Set for top-k shortest path
+        @param setTopK: Set for top-k shortest path
 
-            @param filepath: file path for reading input
+        @param filepath: file path for reading input
 
-        */
+    */
     public static void main(String args[])
     {
         //v = 4;
@@ -164,6 +165,14 @@ public class YJ {
         this.topK = topK;
     }
 
+    public ArrayList<String> getOutputFileStr() {
+        return outputFileStr;
+    }
+
+    public void setOutputFileStr(ArrayList<String> outputFileStr) {
+        this.outputFileStr = outputFileStr;
+    }
+
     public YJ(int vertices) {
         setV(vertices);
         init();
@@ -189,12 +198,14 @@ public class YJ {
         }
 
         //Call findTopK to find the top-k's shortest path
-        return findTopK(compareList,getTopK());
+        findTopK(compareList,getTopK());
+
+        return getOutputFileStr();
     }
 
-    private ArrayList<String> findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
+    private void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
     {
-        ArrayList<String> stpList = new ArrayList<String>();
+        //ArrayList<String> stpList = new ArrayList<String>();
         HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
 
         System.out.println(" ");
@@ -206,11 +217,12 @@ public class YJ {
 
         int counter = 0;
 
-        System.out.println("===================");
-        System.out.println("Top " + k + "'s shortest path: ");
-        System.out.println("===================");
+        String pathOutput = "";
+        String LabelTopK = "Top " + k + "'s shortest path for ";
 
-        //ProgramGUI programGUI = new ProgramGUI();
+        pathOutput += LabelTopK;
+        System.out.println(LabelTopK);
+
 
         for (Map.Entry<Integer, Integer> en : hml.entrySet()) {
             if(counter >= k){
@@ -222,8 +234,12 @@ public class YJ {
             boolean checkEmptyPath = en.getValue() != 0;
 
             if(checkEmptyPath){
-                String pathOutput = "[";
+                String HospitalLabel = "hospital NodeId [" + en.getKey() + "]";
+                pathOutput += HospitalLabel + "\n[";
+
+                System.out.println(HospitalLabel);
                 System.out.print("[");
+
                 for(int rv = inversedList.size() - 1; rv >= 0; rv--){
                     if(rv == 0){
                         System.out.print(inversedList.get(rv));
@@ -234,15 +250,25 @@ public class YJ {
                         pathOutput+= inversedList.get(rv) + ",";
                     }
                 }
-                System.out.print("]\n");
-                pathOutput+= "]\n";
-                System.out.println("===================");
+
+                String label_end = "]\n";
+                String label_endB = "===================";
+
+                pathOutput+= label_end;
+                pathOutput+= label_endB;
+
+                System.out.print(label_end);
+                System.out.println(label_endB);
 
                 counter++;
-                stpList.add(pathOutput);
+                outputFileStr.add(pathOutput);
             }
+
         }
-        return stpList;
+
+        if(outputFileStr.size() == 0){
+            outputFileStr.add("empty path ! Please tranverse the program again.");
+        }
     }
 
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
