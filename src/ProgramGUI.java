@@ -190,14 +190,18 @@ public class ProgramGUI {
 
                    System.out.println("Num of Nodes: " + N);
                    YJ BFS = new YJ(Integer.parseInt(N));
-                   //BFS.setV(Integer.parseInt(N));       //Set the num of Vertice
-
                    BFS.setSource(0);  //Set the source NodeId
                    BFS.setTopK(Integer.parseInt(K));    //Set the top-k's shortest path
                    BFS.setAlgoOption(selectedAlgoOption);
                    BFS.sethNodes(HospitalNodes);
 
-                   BFS.executeBFS();
+                   ArrayList<String> StpList = BFS.executeBFS();
+                   programTextArea.append("\n");
+
+                   //Print out all the shortest paths
+                   for(String output : StpList){
+                       programTextArea.append(output);
+                   }
                }
                catch(IOException e1){
                    programTextArea.append("An error occured. File cannot be created");

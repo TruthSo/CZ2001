@@ -169,7 +169,7 @@ public class YJ {
         init();
     }
 
-    public void executeBFS(){
+    public ArrayList<String> executeBFS(){
         //Method 1: RandomGraph
         if(this.algoOption == 0){
             RandomGraph(v);
@@ -178,25 +178,23 @@ public class YJ {
 
         //Method 2: ReadFile
         else if(this.algoOption == 1){
-            //Readfile(filepath);
-
             //Waiting for YiJia to input the function to execute ReadNote function
         }
 
         HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
-        var bb = gethNodes();
+
         for(int i : gethNodes()){
             System.out.println("Finding h NodeId: " + i);
             compareList.put(i, printShortestDistance(adj, source, i, v));
         }
 
         //Call findTopK to find the top-k's shortest path
-        findTopK(compareList,getTopK());
+        return findTopK(compareList,getTopK());
     }
 
-
-    private static void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
+    private ArrayList<String> findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
     {
+        ArrayList<String> stpList = new ArrayList<String>();
         HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
 
         System.out.println(" ");
@@ -211,6 +209,9 @@ public class YJ {
         System.out.println("===================");
         System.out.println("Top " + k + "'s shortest path: ");
         System.out.println("===================");
+
+        //ProgramGUI programGUI = new ProgramGUI();
+
         for (Map.Entry<Integer, Integer> en : hml.entrySet()) {
             if(counter >= k){
                 break;
@@ -221,21 +222,27 @@ public class YJ {
             boolean checkEmptyPath = en.getValue() != 0;
 
             if(checkEmptyPath){
+                String pathOutput = "[";
                 System.out.print("[");
                 for(int rv = inversedList.size() - 1; rv >= 0; rv--){
                     if(rv == 0){
                         System.out.print(inversedList.get(rv));
+                        pathOutput+= inversedList.get(rv);
                     }
                     else{
                         System.out.print(inversedList.get(rv) + ",");
+                        pathOutput+= inversedList.get(rv) + ",";
                     }
                 }
                 System.out.print("]\n");
+                pathOutput+= "]\n";
                 System.out.println("===================");
 
                 counter++;
+                stpList.add(pathOutput);
             }
         }
+        return stpList;
     }
 
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
