@@ -155,6 +155,8 @@ public class ProgramGUI {
                    O =outputFile.getText();
 
                    programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
+                   File outputFile = new File(O+".txt");
+                   FileWriter fileWriter = new FileWriter("C:/Users/monai/OneDrive/Documents/Github/src/"+outputFile);
                    //To add the link to the BFS.java when completed
 
                    int selectedAlgoOption = -1;
@@ -164,10 +166,8 @@ public class ProgramGUI {
                        programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
 
                        //Add file name inside File()
-                       File outputFile = new File(O+".txt");
-                       FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
-                       fileWriter.write(programTextArea.getText());
-                       fileWriter.close();
+                       //fileWriter.write(programTextArea.getText());
+                       //fileWriter.close();
                        //Check in path if file exists
                        if(outputFile.createNewFile()){
                            programTextArea.append("File created: "+O+".txt");
@@ -201,7 +201,9 @@ public class ProgramGUI {
                    //Print out all the shortest paths
                    for(String output : StpList){
                        programTextArea.append(output);
+                       fileWriter.write(output);
                    }
+                   fileWriter.close();
                }
                catch(IOException e1){
                    programTextArea.append("An error occured. File cannot be created");

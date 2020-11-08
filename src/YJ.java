@@ -205,6 +205,11 @@ public class YJ {
         Map<Integer,Integer> hml = sortByValue(hm);
 
         int counter = 0;
+        String pathOutput = "";
+
+        pathOutput += "===================\n";
+        pathOutput += "Top " + k + "'s shortest path: \n";
+        pathOutput += "===================\n";
 
         System.out.println("===================");
         System.out.println("Top " + k + "'s shortest path: ");
@@ -222,8 +227,8 @@ public class YJ {
             boolean checkEmptyPath = en.getValue() != 0;
 
             if(checkEmptyPath){
-                String pathOutput = "[";
                 System.out.print("[");
+                pathOutput += "[";
                 for(int rv = inversedList.size() - 1; rv >= 0; rv--){
                     if(rv == 0){
                         System.out.print(inversedList.get(rv));
@@ -237,11 +242,13 @@ public class YJ {
                 System.out.print("]\n");
                 pathOutput+= "]\n";
                 System.out.println("===================");
+                pathOutput += "===================\n";
 
                 counter++;
                 stpList.add(pathOutput);
             }
         }
+        pathOutput += "===================\n";
         return stpList;
     }
 
