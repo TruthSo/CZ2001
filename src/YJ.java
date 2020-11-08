@@ -71,19 +71,25 @@ public class YJ {
             addEdge(getAdj(), fromNode, toNode);
         }
     }
-    public void ReadRoadNodes( HashMap<Integer,LinkedList<Integer>> roadNodes){
-        for(var i = 0; i < roadNodes;i++){
-            var fromNode = getRoadNodes(roadNodes, 0);
-            var toNode = getRoadNodes(roadNodes, 0);
-            System.out.println("From [" + fromNode + "] : To [" + toNode + "]");
-            addEdge(ArrayList(), fromNode, toNode);
+    public void ReadRoadNodes(HashMap<Integer, ArrayList<Integer>>  roadNodes){
+        for(var i = 0; i < roadNodes.size();i++){
+            var fromNode = i;
+            var toNodeList =roadNodes.get(i);
+            System.out.println("From Node:" + i);
+            for(int q : toNodeList){
+                var toNode = q;
+
+                System.out.println("ToNoode :" + q);
+                addEdge(getAdj(), fromNode, toNode);
+            }
+            int k = 0;
+            //var fromNode = getRoadNodes(roadNodes, 0);
+            //var toNode = getRoadNodes(roadNodes, 0);
+            //System.out.println("From [" + fromNode + "] : To [" + toNode + "]");
+            //addEdge(ArrayList(), fromNode, toNode);
         }
 
-        }
-
-
-
-
+    }
 
     /*
             @param v = specify the max NodeId.
@@ -163,7 +169,7 @@ public class YJ {
         this.hNodes = hNodes;
     }
 
-    public HashMap<Integer, ArrayList<Integer>> getRoadNodes(HashMap<Integer, LinkedList<Integer>> roadNodes, int i){
+    public HashMap<Integer, ArrayList<Integer>> getRoadNodes(){
         return this.RoadNodes;
     }
 
@@ -199,9 +205,9 @@ public class YJ {
         //Method 2: ReadFile
         else if(this.algoOption == 1){
 
-            var ss = getRoadNodes(roadNodes, 0);
+            var ss = getRoadNodes();
             System.out.println("YJ.java run ReadFile()");
-            ReadRoadNodes();
+            ReadRoadNodes(ss);
 
         }
 
@@ -366,5 +372,4 @@ public class YJ {
         return false;
     }
 }
-
 
