@@ -43,6 +43,7 @@ public class YJ {
                         Integer ToNode = Integer.parseInt(intParts[1]);
                         System.out.println("From [" + FromNode + "] : To [" + ToNode + "]");
 
+
 //                        var aa = getAdj();
 //                        addEdge(aa, FromNode, ToNode);
                         totalEdges++;

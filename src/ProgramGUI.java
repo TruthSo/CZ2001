@@ -156,7 +156,7 @@ public class ProgramGUI {
 
                    programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
                    File outputFile = new File(O+".txt");
-                   FileWriter fileWriter = new FileWriter("C:/Users/monai/OneDrive/Documents/Github/src/"+outputFile);
+                   FileWriter fileWriter = new FileWriter("C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\"+outputFile);
                    //To add the link to the BFS.java when completed
 
                    int selectedAlgoOption = -1;

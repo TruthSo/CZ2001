@@ -13896,7 +13896,7 @@ File reading...
 6402 6402
 6416 6416
 
-File Reading Time (ms): 534
+File Reading Time (ms): 369
 
 
 File reading...
@@ -14051,9 +14051,9 @@ File reading...
 107
 100
 
-File Reading Time (ms): 13
+File Reading Time (ms): 11
 
-Node #: 3 Hospital #: 3 Top-K Hospital #: 3
+Node #: 40 Top-K Hospital #: 2
 
-Running Algorithm - 1: BFS
+Running Algorithm - 1: Random Graph
 
