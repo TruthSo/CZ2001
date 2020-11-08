@@ -179,9 +179,10 @@ public class YJ {
         //Method 2: ReadFile
         else if(this.algoOption == 1){
 
-            String filepath = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input\\";
-            Readfile(filepath);
-            System.out.println("YJ.java run ReadFile)");
+            ;
+
+            System.out.println("YJ.java run ReadFile()");
+
         }
 
         HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
