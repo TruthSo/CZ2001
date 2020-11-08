@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.function.DoubleToIntFunction;
 
 public class YJ {
 
@@ -11,16 +10,19 @@ public class YJ {
     private int source = 0;
     private int topK = 0;
     private ArrayList<Integer> hNodes = new ArrayList<Integer>();
+    private HashMap<Integer, ArrayList<Integer>> RoadNodes;
     private String filepath;
+
+
 
     //getRandomInteger: to get a Random Num
     public static int getRandomInteger(int maximum, int minimum){
         return ((int) (Math.random()*(maximum - minimum))) + minimum;
     }
 
-    public void Readfile(String filepath){
+    public void Readfile(ArrayList<ArrayList<Integer>> filepath){
         try{
-            File myObj = new File(filepath);
+            File myObj = new File(String.valueOf(filepath));
             Scanner myReader = new Scanner(myObj);
 
             int rowNo = 1;
@@ -69,6 +71,16 @@ public class YJ {
             addEdge(getAdj(), fromNode, toNode);
         }
     }
+    public void ReadRoadNodes( HashMap<Integer,LinkedList<Integer>> roadNodes){
+        for(var i = 0; i < roadNodes;i++){
+            var fromNode = getRoadNodes(roadNodes, 0);
+            var toNode = getRoadNodes(roadNodes, 0);
+            System.out.println("From [" + fromNode + "] : To [" + toNode + "]");
+            addEdge(ArrayList(), fromNode, toNode);
+        }
+
+        }
+
 
 
 
@@ -151,6 +163,14 @@ public class YJ {
         this.hNodes = hNodes;
     }
 
+    public HashMap<Integer, ArrayList<Integer>> getRoadNodes(HashMap<Integer, LinkedList<Integer>> roadNodes, int i){
+        return this.RoadNodes;
+    }
+
+    public void setRoadNodes(HashMap<Integer, ArrayList<Integer>> roadNotes) {
+        this.RoadNodes = roadNotes;
+    }
+
     public void setSource(int source) {
         this.source = source;
         System.out.println("Start NodeId: " + source);
@@ -178,16 +198,13 @@ public class YJ {
 
         //Method 2: ReadFile
         else if(this.algoOption == 1){
-<<<<<<< HEAD
 
-            ;
-
+            var ss = getRoadNodes(roadNodes, 0);
             System.out.println("YJ.java run ReadFile()");
+            ReadRoadNodes();
 
-=======
-            //Waiting for YiJia to input the function to execute ReadNote function
->>>>>>> f4eed02b28a79687859007a2975e7a9e8537e6ac
         }
+
 
         HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
 
@@ -199,6 +216,7 @@ public class YJ {
         //Call findTopK to find the top-k's shortest path
         return findTopK(compareList,getTopK());
     }
+
 
     private ArrayList<String> findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
     {

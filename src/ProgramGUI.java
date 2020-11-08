@@ -23,6 +23,7 @@ public class ProgramGUI {
     public static JTextArea programTextArea;
     public static String N, K,O;
     public static ArrayList<Integer> HospitalNodes;
+    public static HashMap<Integer, ArrayList<Integer>> RoadNodes;
 
     public static void main(String[] args) {
         //GUI Window
@@ -52,7 +53,7 @@ public class ProgramGUI {
                     System.out.println(ex);
                 } finally {
                     graphFileLabel.setText(graphFile.getName());
-                    readGraphFile(graphFile);
+                    RoadNodes = readGraphFile(graphFile);
                 }
             }
         });
@@ -179,6 +180,21 @@ public class ProgramGUI {
                        System.out.println("Selected Algo 1");
                    }
                    else if (algo2.isSelected()){
+
+                       programTextArea.append("Running Algorithm - "+algo2.getText()+"\n\n");
+
+                       //Add file name inside File()
+                       File outputFile = new File(O+".txt");
+                       FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
+                       fileWriter.write(programTextArea.getText());
+                       fileWriter.close();
+
+                       if(outputFile.createNewFile()){
+                           programTextArea.append("File created: "+O+".txt");
+                       }
+                       else{
+                           programTextArea.append("File already exists.");
+                       }
                        selectedAlgoOption = 1;
                        System.out.println("Selected Algo 2");
                    }
@@ -194,6 +210,10 @@ public class ProgramGUI {
                    BFS.setTopK(Integer.parseInt(K));    //Set the top-k's shortest path
                    BFS.setAlgoOption(selectedAlgoOption);
                    BFS.sethNodes(HospitalNodes);
+
+                   if(algo2.isSelected()){
+                       BFS.setRoadNodes(RoadNodes);
+                   }
 
                    ArrayList<String> StpList = BFS.executeBFS();
                    programTextArea.append("\n");

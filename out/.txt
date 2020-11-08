@@ -13896,16 +13896,10 @@ File reading...
 6402 6402
 6416 6416
 
-File Reading Time (ms): 562
+File Reading Time (ms): 702
 
 
-Node #: 6 Top-K Hospital #: 8
-
-Node #: 6 Top-K Hospital #: 8
-
-Running Algorithm - 1: Random Graph
-
-File created: .txtFile reading...
+File reading...
 
 0
 1
@@ -14057,9 +14051,9 @@ File created: .txtFile reading...
 107
 100
 
-File Reading Time (ms): 12
+File Reading Time (ms): 16
 
-Node #: 6 Top-K Hospital #: 8
+Node #: 8 Top-K Hospital #: 2
 
-Running Algorithm - 1: Random Graph
+Running Algorithm - 2: Real Network Graph
 
