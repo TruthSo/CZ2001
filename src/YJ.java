@@ -13,6 +13,16 @@ public class YJ {
     private ArrayList<Integer> hNodes = new ArrayList<Integer>();
     private String filepath;
     private ArrayList<String> outputFileStr = new ArrayList<String>();
+<<<<<<< HEAD
+    private HashMap<Integer, ArrayList<Integer>> RoadNodes;
+
+
+    //========== Functions Declaration ==========
+
+    public YJ(int vertices) {
+        setV(vertices);
+        init();
+=======
 
     //getRandomInteger: to get a Random Num
     public static int getRandomInteger(int maximum, int minimum){
@@ -116,15 +126,18 @@ public class YJ {
 //
 //        //Call findTopK to find the top-k's shortest path
 //        findTopK(compareList,setTopK);
+>>>>>>> 37f5f31cbae3c0a68026db1863b5a31c81c1b7c4
     }
 
     private void init(){
-
         adj =  new ArrayList<ArrayList<Integer>>(getV());
+
         //Initialize the adjacency list
         for (int i = 0; i < getV(); i++) {
             adj.add(new ArrayList<Integer>());
         }
+<<<<<<< HEAD
+=======
         int k = 0;
     }
 
@@ -176,6 +189,7 @@ public class YJ {
     public YJ(int vertices) {
         setV(vertices);
         init();
+>>>>>>> 37f5f31cbae3c0a68026db1863b5a31c81c1b7c4
     }
 
     public ArrayList<String> executeBFS(){
@@ -187,7 +201,9 @@ public class YJ {
 
         //Method 2: ReadFile
         else if(this.algoOption == 1){
-            //Waiting for YiJia to input the function to execute ReadNote function
+            var ss = getRoadNodes();
+            System.out.println("YJ.java run ReadFile()");
+            ReadRoadNodes(ss);
         }
 
         HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
@@ -201,10 +217,45 @@ public class YJ {
         findTopK(compareList,getTopK());
 
         return getOutputFileStr();
+<<<<<<< HEAD
+    }
+
+    public void RandomGraph(int totalnodes){
+        for(int i = 0; i < totalnodes;i++){
+            int fromNode = getRandomInteger(totalnodes, 0);
+            int toNode = getRandomInteger(totalnodes, 0);
+            System.out.println("From [" + fromNode + "] : To [" + toNode + "]");
+            addEdge(getAdj(), fromNode, toNode);
+        }
+    }
+
+    public void ReadRoadNodes(HashMap<Integer, ArrayList<Integer>>  roadNodes){
+        for(var i = 0; i < roadNodes.size();i++){
+            var fromNode = i;
+            var toNodeList =roadNodes.get(i);
+            System.out.println("From Node:" + i);
+            for(int q : toNodeList){
+                var toNode = q;
+
+                System.out.println("ToNoode :" + q);
+                addEdge(getAdj(), fromNode, toNode);
+            }
+            int k = 0;
+            //var fromNode = getRoadNodes(roadNodes, 0);
+            //var toNode = getRoadNodes(roadNodes, 0);
+            //System.out.println("From [" + fromNode + "] : To [" + toNode + "]");
+            //addEdge(ArrayList(), fromNode, toNode);
+        }
+
+    }
+
+    private void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k){
+=======
     }
 
     private void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k)
     {
+>>>>>>> 37f5f31cbae3c0a68026db1863b5a31c81c1b7c4
         //ArrayList<String> stpList = new ArrayList<String>();
         HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
 
@@ -271,67 +322,7 @@ public class YJ {
         }
     }
 
-    public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
-    {
-        // Create a list from elements of HashMap
-        List<Map.Entry<Integer, Integer> > list = new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
-
-        // Sort the list
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
-            public int compare(Map.Entry<Integer, Integer> o1,
-                               Map.Entry<Integer, Integer> o2)
-            {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
-
-        // put data from sorted list to hashmap
-        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
-        for (Map.Entry<Integer, Integer> aa : list) {
-            temp.put(aa.getKey(), aa.getValue());
-        }
-        return temp;
-    }
-
-    private static void addEdge(ArrayList<ArrayList<Integer>> adj, int i, int j)
-    {
-        adj.get(i).add(j);
-        adj.get(j).add(i);
-    }
-
-
-    private static LinkedList<Integer> printShortestDistance(ArrayList<ArrayList<Integer>> adj, int s, int dest, int v)
-    {
-
-        int pred[] = new int[v];
-        int dist[] = new int[v];
-
-        if (BFS(adj, s, dest, v, pred, dist) == false) {
-            return new LinkedList<Integer>();
-        }
-
-        LinkedList<Integer> path = new LinkedList<Integer>();
-        int crawl = dest;
-        path.add(crawl);
-        while (pred[crawl] != -1) {
-            path.add(pred[crawl]);
-            crawl = pred[crawl];
-        }
-
-        System.out.println("\nPath length is: " + dist[dest]);
-        System.out.println("Path is :");
-        for (int i = path.size() - 1; i >= 0; i--) {
-            System.out.print(path.get(i) + " ");
-        }
-        System.out.println("\n---------------");
-        return path;
-    }
-
-
-    private static boolean BFS(ArrayList<ArrayList<Integer>> adj, int src,
-                               int dest, int v, int pred[], int dist[])
-    {
-
+    private static boolean BFS(ArrayList<ArrayList<Integer>> adj, int src, int dest, int v, int pred[], int dist[]){
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
         boolean visited[] = new boolean[v];
@@ -365,6 +356,117 @@ public class YJ {
         }
         return false;
     }
+
+    private static void addEdge(ArrayList<ArrayList<Integer>> adj, int i, int j) {
+        adj.get(i).add(j);
+        adj.get(j).add(i);
+    }
+
+    private static LinkedList<Integer> printShortestDistance(ArrayList<ArrayList<Integer>> adj, int s, int dest, int v) {
+        int pred[] = new int[v];
+        int dist[] = new int[v];
+
+        if (BFS(adj, s, dest, v, pred, dist) == false) {
+            return new LinkedList<Integer>();
+        }
+
+        LinkedList<Integer> path = new LinkedList<Integer>();
+        int crawl = dest;
+        path.add(crawl);
+        while (pred[crawl] != -1) {
+            path.add(pred[crawl]);
+            crawl = pred[crawl];
+        }
+
+        System.out.println("\nPath length is: " + dist[dest]);
+        System.out.println("Path is :");
+        for (int i = path.size() - 1; i >= 0; i--) {
+            System.out.print(path.get(i) + " ");
+        }
+        System.out.println("\n---------------");
+        return path;
+    }
+
+    public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm){
+        // Create a list from elements of HashMap
+        List<Map.Entry<Integer, Integer> > list = new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
+            public int compare(Map.Entry<Integer, Integer> o1,
+                               Map.Entry<Integer, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        for (Map.Entry<Integer, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
+
+    //getRandomInteger: to get a Random Num
+    public static int getRandomInteger(int maximum, int minimum){
+        return ((int) (Math.random()*(maximum - minimum))) + minimum;
+    }
+
+
+    //============ Getter & Setter
+
+    public ArrayList<ArrayList<Integer>> getAdj() {
+        return adj;
+    }
+
+    public void setAlgoOption(int algoOption) {
+        this.algoOption = algoOption;
+    }
+
+    public ArrayList<Integer> gethNodes() {
+        return hNodes;
+    }
+
+    public void setV(int v) {
+        this.v = v;
+    }
+
+    public int getV() {
+        return v;
+    }
+
+    public void sethNodes(ArrayList<Integer> hNodes) {
+        this.hNodes = hNodes;
+    }
+
+    public HashMap<Integer, ArrayList<Integer>> getRoadNodes(){
+        return this.RoadNodes;
+    }
+
+    public void setRoadNodes(HashMap<Integer, ArrayList<Integer>> roadNotes) {
+        this.RoadNodes = roadNotes;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
+        System.out.println("Start NodeId: " + source);
+    }
+
+    public int getTopK() {
+        return topK;
+    }
+
+    public void setTopK(int topK) {
+        this.topK = topK;
+    }
+
+    public ArrayList<String> getOutputFileStr() {
+        return outputFileStr;
+    }
+
+    public void setOutputFileStr(ArrayList<String> outputFileStr) {
+        this.outputFileStr = outputFileStr;
+    }
+
 }
-
-

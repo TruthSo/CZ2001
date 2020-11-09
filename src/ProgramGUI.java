@@ -17,8 +17,19 @@ public class ProgramGUI {
      * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
+<<<<<<< HEAD
     public static String defaultDirectory = "C:\\Users\\YIJIA\\Desktop\\Algo2\\out";
     //public static String outputDirectory = "C:\Users\YIJIA\Desktop\Algo2\src\input";
+=======
+<<<<<<< HEAD
+    //public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
+    //public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
+    public static String defaultDirectory = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input";
+=======
+    public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
+    //public static String outputDirectory = "/Users/wenjun/Desktop/CZ2001_Mindy/Output/";
+>>>>>>> 37f5f31cbae3c0a68026db1863b5a31c81c1b7c4
+>>>>>>> da2df458430505fc15c22541a1c4dba6848a0dc4
     public static String outputDirectory = System.getProperty("user.dir");
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
@@ -120,7 +131,6 @@ public class ProgramGUI {
         JLabel hSizeLabel;
         hSizeLabel = new JLabel("Input # of Hospitals: ");
         hSizeLabel.setBounds(50, 300, 150, 30);
-
         //Input Hospital Size TextBox
         JTextField hSizeInput;
         hSizeInput = new JTextField();
@@ -141,8 +151,7 @@ public class ProgramGUI {
         outputLabel.setBounds(50, 325, 200, 30);
 
         //Output File Name (TextBox)
-        JTextField outputFile;
-        outputFile = new JTextField();
+        JTextField outputFile = new JTextField();
         outputFile.setBounds(225, 325, 150, 30);
 
         //Generate Algorithm with user input
@@ -151,6 +160,79 @@ public class ProgramGUI {
         transverseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+                try{
+                    N= nSizeInput.getText();
+                    K= kSizeInput.getText();
+                    O =outputFile.getText();
+
+                    //Add file name inside File()
+                    File outputFile = new File(O+".txt");
+
+                    boolean checkIsMac = outputDirectory.contains("/");
+                    String pathStr = checkIsMac ? "/" : "\\";
+                    String addDirectory = "Output";
+                    addDirectory = pathStr + addDirectory + pathStr;
+
+                    File test = new File(outputDirectory +  addDirectory);
+                    test.mkdirs();
+
+                    FileWriter fileWriter = new FileWriter(test.getAbsolutePath() + pathStr + outputFile);
+
+                    //Check in path if file exists
+                    if(outputFile.createNewFile()){
+                        programTextArea.append("File created: "+O+".txt");
+                    }
+                    else{
+                        programTextArea.append("File already exists.");
+                    }
+
+
+
+                    programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
+                    //To add the link to the BFS.java when completed
+
+                    int selectedAlgoOption = -1;
+                    if(algo1.isSelected())
+                    {
+                        //To call out the algo1.java class
+                        programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
+                        selectedAlgoOption = 0;
+                        System.out.println("Selected Algo 1");
+                    }
+                    else if (algo2.isSelected()){
+                        programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
+                        selectedAlgoOption = 1;
+                        System.out.println("Selected Algo 2");
+                    }
+                    else
+                    {
+                        programTextArea.append("Kindly select the algorithm."+"\n\n");
+                    }
+
+
+                    System.out.println("Num of Nodes: " + N);
+                    YJ BFS = new YJ(Integer.parseInt(N));
+                    BFS.setSource(0);  //Set the source NodeId
+                    BFS.setTopK(Integer.parseInt(K));    //Set the top-k's shortest path
+                    BFS.setAlgoOption(selectedAlgoOption);
+                    BFS.sethNodes(HospitalNodes);
+
+                    ArrayList<String> StpList = BFS.executeBFS();
+                    programTextArea.append("\n");
+
+                    //Print out all the shortest paths
+                    for(String output : StpList){
+                        programTextArea.append(output);
+                        fileWriter.write(output);
+                    }
+                    fileWriter.close();
+                }
+                catch(IOException e1){
+                    programTextArea.append("An error occured. File cannot be created");
+                    e1.printStackTrace();
+                }
+=======
                try{
                    N= nSizeInput.getText();
                    K= kSizeInput.getText();
@@ -222,6 +304,7 @@ public class ProgramGUI {
                    programTextArea.append("An error occured. File cannot be created");
                    e1.printStackTrace();
                }
+>>>>>>> 37f5f31cbae3c0a68026db1863b5a31c81c1b7c4
             }
         });
 
@@ -235,11 +318,11 @@ public class ProgramGUI {
                     O = outputFile.getText();
                     //Add file name inside File()
                     File outputFile = new File(O+".txt");
-                    
+
                     FileWriter fileWriter = new FileWriter("C:/Users/monai/OneDrive/Documents/Github/src/"+outputFile);
                     fileWriter.write(programTextArea.getText());
                     fileWriter.close();
-                    
+
                     //To store to the path....TBC
                     if (outputFile.createNewFile()) {
                         System.out.println("File created: " + O);
@@ -286,7 +369,6 @@ public class ProgramGUI {
         frame.add(scrollablePTextArea);
 /*        //frame.add(hSizeLabel);
         //frame.add(hSizeInput);
-
         //frame.add(programTextArea);
         //frame.getContentPane().add(scrollablePTextArea);
         // frame.add(saveOutputButton);*/
