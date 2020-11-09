@@ -17,13 +17,10 @@ public class ProgramGUI {
      * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
-<<<<<<< HEAD
-    public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
-    public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
-=======
+    //public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
+    //public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
     public static String defaultDirectory = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input";
-    public static String outputDirectory = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\out";
->>>>>>> 977f31d05d682eefae561ea1233e7f3419d20ddd
+    public static String outputDirectory = System.getProperty("user.dir");
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
     public static String N, K,O;
@@ -143,8 +140,7 @@ public class ProgramGUI {
         outputLabel.setBounds(50, 325, 200, 30);
 
         //Output File Name (TextBox)
-        JTextField outputFile;
-        outputFile = new JTextField();
+        JTextField outputFile = new JTextField();
         outputFile.setBounds(225, 325, 150, 30);
 
         //Generate Algorithm with user input
@@ -160,8 +156,26 @@ public class ProgramGUI {
 
                     //Add file name inside File()
                     File outputFile = new File(O+".txt");
-                    FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
-                    //fileWriter.write(programTextArea.getText());
+
+                    boolean checkIsMac = outputDirectory.contains("/");
+                    String pathStr = checkIsMac ? "/" : "\\";
+                    String addDirectory = "Output";
+                    addDirectory = pathStr + addDirectory + pathStr;
+
+                    File test = new File(outputDirectory +  addDirectory);
+                    test.mkdirs();
+
+                    FileWriter fileWriter = new FileWriter(test.getAbsolutePath() + pathStr + outputFile);
+
+                    //Check in path if file exists
+                    if(outputFile.createNewFile()){
+                        programTextArea.append("File created: "+O+".txt");
+                    }
+                    else{
+                        programTextArea.append("File already exists.");
+                    }
+
+
 
                     programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
                     //To add the link to the BFS.java when completed
@@ -171,28 +185,11 @@ public class ProgramGUI {
                     {
                         //To call out the algo1.java class
                         programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
-
-                        //Check in path if file exists
-                        if(outputFile.createNewFile()){
-                            programTextArea.append("File created: "+O+".txt");
-                        }
-                        else{
-                            programTextArea.append("File already exists.");
-                        }
-
                         selectedAlgoOption = 0;
                         System.out.println("Selected Algo 1");
                     }
                     else if (algo2.isSelected()){
                         programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
-
-                        //Check in path if file exists
-                        if(outputFile.createNewFile()){
-                            programTextArea.append("File created: "+O+".txt");
-                        }
-                        else{
-                            programTextArea.append("File already exists.");
-                        }
                         selectedAlgoOption = 1;
                         System.out.println("Selected Algo 2");
                     }
