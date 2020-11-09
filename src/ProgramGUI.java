@@ -18,7 +18,7 @@ public class ProgramGUI {
 
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
-    public static String outputDirectory = "/Users/wenjun/Desktop/CZ2001_Mindy/Output/";
+    public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
     public static String N, K,O;
