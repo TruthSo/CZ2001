@@ -16,6 +16,7 @@ public class YJ {
     private ArrayList<String> outputFileStr = new ArrayList<String>();
     private HashMap<Integer, ArrayList<Integer>> RoadNodes;
 
+
     //========== Functions Declaration ==========
 
     public YJ(int vertices) {
@@ -76,43 +77,6 @@ public class YJ {
             for(int q : toNodeList){
                 var toNode = q;
 
-<<<<<<< HEAD
-    /*
-        @param v = specify the max NodeId.
-        Eg: v = 10 is equals to 0 ~ 10
-
-        @param source
-        @param hNodes
-        @param setTopK
-
-        @param filepath
-
-    */
-    public static void main(String args[])
-    {
-        v = 4;
-        int source = 1;
-        int[] hNodes = new int[]{ 9, 6,8, 2};
-        int setTopK = 3;
-
-        //Initialize the adjacency list
-        for (int i = 0; i < v; i++) {
-            adj.add(new ArrayList<Integer>());
-        }
-
-        //Method 1: RandomGraph
-        //RandomGraph(v);
-
-        //Method 2: Read from file
-        //String filepath = "/Users/wenjun/Desktop/CZ2001/src/input/roadNet-PA.txt";
-        String filepath = "/Users/wenjun/Desktop/CZ2001/src/input/test.txt";
-        Readfile(filepath);
-
-
-        HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
-        for(int i : hNodes){
-            compareList.put(i, printShortestDistance(adj, source, i, v));
-=======
                 System.out.println("ToNoode :" + q);
                 addEdge(getAdj(), fromNode, toNode);
             }
@@ -121,7 +85,6 @@ public class YJ {
             //var toNode = getRoadNodes(roadNodes, 0);
             //System.out.println("From [" + fromNode + "] : To [" + toNode + "]");
             //addEdge(ArrayList(), fromNode, toNode);
->>>>>>> yijia
         }
 
     }
@@ -156,22 +119,6 @@ public class YJ {
             boolean checkEmptyPath = en.getValue() != 0;
 
             if(checkEmptyPath){
-<<<<<<< HEAD
-                System.out.print("[");
-                for(int rv = inversedList.size() - 1; rv >= 0; rv--){
-                    if(rv == 0){
-                        System.out.print(inversedList.get(rv));
-                    }
-                    else{
-                        System.out.print(inversedList.get(rv) + ",");
-                    }
-                }
-                System.out.print("]\n");
-                System.out.println("===================");
-
-                counter++;
-            }
-=======
                 String HospitalLabel = "hospital NodeId [" + en.getKey() + "]";
                 pathOutput += HospitalLabel + "\n[";
 
@@ -206,7 +153,6 @@ public class YJ {
 
         if(outputFileStr.size() == 0){
             outputFileStr.add("empty path ! Please tranverse the program again.");
->>>>>>> yijia
         }
     }
 

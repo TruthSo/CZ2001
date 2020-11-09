@@ -17,8 +17,6 @@ public class ProgramGUI {
      * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
-    //public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
-    //public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
     public static String defaultDirectory = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input";
     public static String outputDirectory = System.getProperty("user.dir");
     public static File graphFile, hospitalFile;
@@ -162,10 +160,11 @@ public class ProgramGUI {
                     String addDirectory = "Output";
                     addDirectory = pathStr + addDirectory + pathStr;
 
-                    File test = new File(outputDirectory +  addDirectory);
-                    test.mkdirs();
+                    //Create a Directory to store output files "/Output"
+                    File outputDir = new File(outputDirectory +  addDirectory);
+                    outputDir.mkdirs();
 
-                    FileWriter fileWriter = new FileWriter(test.getAbsolutePath() + pathStr + outputFile);
+                    FileWriter fileWriter = new FileWriter(outputDir.getAbsolutePath() + pathStr + outputFile);
 
                     //Check in path if file exists
                     if(outputFile.createNewFile()){
