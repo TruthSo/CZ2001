@@ -1,0 +1,3 @@
+Top 1's shortest path for hospital NodeId [1]
+[0,1]
+===================
