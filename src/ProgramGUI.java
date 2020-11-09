@@ -18,13 +18,15 @@ public class ProgramGUI {
 
     //Windows path
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
-    public static String outputDirectory = "/Users/wenjun/Desktop/CZ2001_Mindy/Output/";
+    //public static String outputDirectory = "/Users/wenjun/Desktop/CZ2001_Mindy/Output/";
+    public static String outputDirectory = System.getProperty("user.dir");
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
     public static String N, K,O;
     public static ArrayList<Integer> HospitalNodes;
 
     public static void main(String[] args) {
+
         //GUI Window
         JFrame frame = new JFrame("PT2 GrpB2 Graph Algorithm Program");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,7 +158,18 @@ public class ProgramGUI {
 
                    //Add file name inside File()
                    File outputFile = new File(O+".txt");
-                   FileWriter fileWriter = new FileWriter(outputDirectory+outputFile);
+
+                   //System.out.println("Working Directory = " + System.getProperty("user.dir"));
+
+                   boolean checkIsMac = outputDirectory.contains("/");
+                   String pathStr = checkIsMac ? "/" : "\\";
+                   String addDirectory = "Output";
+                   addDirectory = pathStr + addDirectory + pathStr;
+
+                   File test = new File(outputDirectory +  addDirectory);
+                   test.mkdirs();
+
+                   FileWriter fileWriter = new FileWriter(test.getAbsolutePath() + pathStr + outputFile);
                    //fileWriter.write(programTextArea.getText());
 
                    programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
