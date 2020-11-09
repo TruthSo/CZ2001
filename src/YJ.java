@@ -15,7 +15,6 @@ public class YJ {
     private ArrayList<String> outputFileStr = new ArrayList<String>();
     private HashMap<Integer, ArrayList<Integer>> RoadNodes;
 
-
     //========== Functions Declaration ==========
 
     public YJ(int vertices) {
