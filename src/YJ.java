@@ -18,6 +18,37 @@ public class YJ {
     public static int getRandomInteger(int maximum, int minimum){
         return ((int) (Math.random()*(maximum - minimum))) + minimum;
     }
+    public ArrayList<ArrayList<Integer>> getAdj() {
+        return adj;
+    }
+
+    public void setAlgoOption(int algoOption) {
+        this.algoOption = algoOption;
+    }
+
+    public ArrayList<Integer> gethNodes() {
+        return hNodes;
+    }
+
+    public void setV(int v) {
+        this.v = v;
+    }
+
+    public int getV() {
+        return v;
+    }
+
+    public void sethNodes(ArrayList<Integer> hNodes) {
+        this.hNodes = hNodes;
+    }
+
+    public HashMap<Integer, ArrayList<Integer>> getRoadNodes(){
+        return this.RoadNodes;
+    }
+    public void setRoadNodes(HashMap<Integer, ArrayList<Integer>> roadNotes) {
+        this.RoadNodes = roadNotes;
+    }
+
 
 
     public void RandomGraph(int totalnodes){
@@ -68,36 +99,6 @@ public class YJ {
         int k = 0;
     }
 
-    public ArrayList<ArrayList<Integer>> getAdj() {
-        return adj;
-    }
-
-    public void setAlgoOption(int algoOption) {
-        this.algoOption = algoOption;
-    }
-
-    public ArrayList<Integer> gethNodes() {
-        return hNodes;
-    }
-
-    public void setV(int v) {
-        this.v = v;
-    }
-
-    public int getV() {
-        return v;
-    }
-
-    public void sethNodes(ArrayList<Integer> hNodes) {
-        this.hNodes = hNodes;
-    }
-
-    public HashMap<Integer, ArrayList<Integer>> getRoadNodes(){
-        return this.RoadNodes;
-    }
-    public void setRoadNodes(HashMap<Integer, ArrayList<Integer>> roadNotes) {
-        this.RoadNodes = roadNotes;
-    }
 
     public void setSource(int source) {
         this.source = source;
@@ -220,27 +221,7 @@ public class YJ {
         }
     }
 
-    public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
-    {
-        // Create a list from elements of HashMap
-        List<Map.Entry<Integer, Integer> > list = new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
 
-        // Sort the list
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
-            public int compare(Map.Entry<Integer, Integer> o1,
-                               Map.Entry<Integer, Integer> o2)
-            {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
-
-        // put data from sorted list to hashmap
-        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
-        for (Map.Entry<Integer, Integer> aa : list) {
-            temp.put(aa.getKey(), aa.getValue());
-        }
-        return temp;
-    }
 
     private static void addEdge(ArrayList<ArrayList<Integer>> adj, int i, int j)
     {
@@ -275,7 +256,27 @@ public class YJ {
         System.out.println("\n---------------");
         return path;
     }
+    public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<Integer, Integer> > list = new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
 
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
+            public int compare(Map.Entry<Integer, Integer> o1,
+                               Map.Entry<Integer, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        for (Map.Entry<Integer, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
 
     private static boolean BFS(ArrayList<ArrayList<Integer>> adj, int src,
                                int dest, int v, int pred[], int dist[])
