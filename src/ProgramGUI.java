@@ -17,8 +17,13 @@ public class ProgramGUI {
      * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
+<<<<<<< HEAD
     public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\input\\";
     public static String outputDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src\\output\\";
+=======
+    public static String defaultDirectory = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\src\\input";
+    public static String outputDirectory = "C:\\Users\\YIJIA\\Desktop\\Algorithm 2\\out";
+>>>>>>> 977f31d05d682eefae561ea1233e7f3419d20ddd
     public static File graphFile, hospitalFile;
     public static JTextArea programTextArea;
     public static String N, K,O;
