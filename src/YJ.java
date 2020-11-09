@@ -15,6 +15,7 @@ public class YJ {
     private String filepath;
     private ArrayList<String> outputFileStr = new ArrayList<String>();
     private HashMap<Integer, ArrayList<Integer>> RoadNodes;
+    private HashMap<Integer,HashMap<Integer,ArrayList<Integer>>> specialNodes;
 
 
     //========== Functions Declaration ==========
@@ -27,24 +28,88 @@ public class YJ {
     private void init(){
         adj =  new ArrayList<ArrayList<Integer>>(getV());
 
+
+
         //Initialize the adjacency list
         for (int i = 0; i < getV(); i++) {
             adj.add(new ArrayList<Integer>());
         }
     }
 
+    //HashMap<Integer, ArrayList<Integer>>
+    private void RoadGraphInit(){
+
+        // <Key,ArrayList<>> = <i_generated, <FromNodeId,<ToNodeIds>>>
+
+        //HashMap<Integer,HashMap<Integer,ArrayList<Integer>>> test = new HashMap<Integer,HashMap<Integer,ArrayList<Integer>>>();
+
+
+        HashMap<Integer,ArrayList<Integer>> test = new HashMap<Integer,ArrayList<Integer>>();
+        var RoadNodesArr = getRoadNodes().keySet().toArray();
+
+
+        for(int i = 0; i < getRoadNodes().size();i++){
+
+            Object FromNodeId = RoadNodesArr[i];
+            var ToNodeIds = getRoadNodes().get(FromNodeId);
+
+            var maxIds = Collections.max(ToNodeIds);
+
+            if(ToNodeIds.size() == 1 &&  ToNodeIds.get(0) == 0){
+                maxIds = (Integer)FromNodeId;
+            }
+
+            if(maxIds > getAdj().size()){
+                int endloop = (maxIds - getAdj().size()) + 1;
+                for (int q = 0; q < endloop; q++) {
+                    adj.add(new ArrayList<Integer>());
+                }
+            }
+
+            for(int j : ToNodeIds){
+                addEdge(getAdj(), (Integer)FromNodeId, j);
+            }
+            // test.put((Integer)FromNodeId,ToNodeIds);
+            // int k = 0;
+        }
+        System.out.println("xxxx");
+        //setRoadNodes(test);
+        //return test;
+    }
+
+
     public ArrayList<String> executeBFS(){
+
+
         //Method 1: RandomGraph
         if(this.algoOption == 0){
             RandomGraph(v);
             System.out.println("YJ.java run RandomGraph()");
         }
-
         //Method 2: ReadFile
         else if(this.algoOption == 1){
-            var ss = getRoadNodes();
+
+            //temp call RoadGraphInit() in executeBFS(), later need to do a if-else, due to RoadNetwork no need to call the original adj init
+
+
+            //Temp Comment
+            //var ss = getRoadNodes();
+            //ReadRoadNodes(ss);
+
+            RoadGraphInit();
+            //ReadNetworkNodes();
+
+            var maxIds = Collections.max(gethNodes());
+
+            if(maxIds > getAdj().size()){
+                int endloop = (maxIds - getAdj().size()) + 1;
+                for (int q = 0; q < endloop; q++) {
+                    adj.add(new ArrayList<Integer>());
+                }
+
+            }
+            v = getAdj().size();
             System.out.println("YJ.java run ReadFile()");
-            ReadRoadNodes(ss);
         }
 
         HashMap<Integer,LinkedList<Integer>> compareList = new HashMap<Integer,LinkedList<Integer>>();
@@ -76,18 +141,29 @@ public class YJ {
             System.out.println("From Node:" + i);
             for(int q : toNodeList){
                 var toNode = q;
-
-                System.out.println("ToNoode :" + q);
                 addEdge(getAdj(), fromNode, toNode);
             }
-            int k = 0;
-            //var fromNode = getRoadNodes(roadNodes, 0);
-            //var toNode = getRoadNodes(roadNodes, 0);
-            //System.out.println("From [" + fromNode + "] : To [" + toNode + "]");
-            //addEdge(ArrayList(), fromNode, toNode);
         }
-
     }
+
+    //temp new node
+    private void ReadNetworkNodes(){
+
+        var RoadNodesArr = getRoadNodes().keySet().toArray();
+
+        for(var i = 0; i < getRoadNodes().size();i++){
+
+//            getSpecialNodes().get(i);
+//            var fromNode = i;
+//            var toNodeList =roadNodes.get(i);
+            System.out.println("From Node:" + i);
+
+            //addEdge(getAdj(), fromNode, toNode);
+
+            int kk = 0;
+        }
+    }
+
 
     private void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k){
         //ArrayList<String> stpList = new ArrayList<String>();
@@ -303,4 +379,11 @@ public class YJ {
         this.outputFileStr = outputFileStr;
     }
 
+    public HashMap<Integer, HashMap<Integer, ArrayList<Integer>>> getSpecialNodes() {
+        return specialNodes;
+    }
+
+    public void setSpecialNodes(HashMap<Integer, HashMap<Integer, ArrayList<Integer>>> specialNodes) {
+        this.specialNodes = specialNodes;
+    }
 }

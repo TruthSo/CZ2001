@@ -23,6 +23,7 @@ public class ProgramGUI {
     public static JTextArea programTextArea;
     public static String N, K,O;
     public static ArrayList<Integer> HospitalNodes;
+    public static HashMap<Integer, ArrayList<Integer>> RoadNodes;
 
     public static void main(String[] args) {
         //GUI Window
@@ -52,7 +53,7 @@ public class ProgramGUI {
                     System.out.println(ex);
                 } finally {
                     graphFileLabel.setText(graphFile.getName());
-                    readGraphFile(graphFile);
+                    RoadNodes = readGraphFile(graphFile);
                 }
             }
         });
@@ -155,6 +156,7 @@ public class ProgramGUI {
                     //Add file name inside File()
                     File outputFile = new File(O+".txt");
 
+
                     boolean checkIsMac = outputDirectory.contains("/");
                     String pathStr = checkIsMac ? "/" : "\\";
                     String addDirectory = "Output";
@@ -200,6 +202,11 @@ public class ProgramGUI {
 
                     System.out.println("Num of Nodes: " + N);
                     YJ BFS = new YJ(Integer.parseInt(N));
+
+                    if(algo2.isSelected()){
+                        BFS.setRoadNodes(RoadNodes);
+                    }
+
                     BFS.setSource(0);  //Set the source NodeId
                     BFS.setTopK(Integer.parseInt(K));    //Set the top-k's shortest path
                     BFS.setAlgoOption(selectedAlgoOption);
