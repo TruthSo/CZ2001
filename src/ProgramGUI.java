@@ -13,7 +13,7 @@ public class ProgramGUI {
 
     /*Set defaultDirectory
      * Change the path for defaultDirectory
-     * Windows path: public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO_GIT\\src";
+     * Windows path: public static String defaultDirectory = "C:\\Users\\mindy\\IdeaProjects\\ALGO-newupdate\\src";
      * Mac path: public static String defaultDirectory = "/Users/wenjun/Downloads/14_9/"; */
 
     //Windows path
@@ -94,7 +94,6 @@ public class ProgramGUI {
         JRadioButton algo1 = new JRadioButton("1: Random Graph");
         algo1.setBounds(225, 150, 200, 30);
 
-        //Do not use!!
         //Algorithm Radio Button 2
         JRadioButton algo2 = new JRadioButton("2: Real Network Graph");
         algo2.setBounds(225, 180, 200, 30);
@@ -114,16 +113,6 @@ public class ProgramGUI {
         nSizeInput = new JTextField();
         nSizeInput.setBounds(225, 225, 150, 30);
 
-/*      //Do not use!!
-        //Input Hospital Size Label
-        JLabel hSizeLabel;
-        hSizeLabel = new JLabel("Input # of Hospitals: ");
-        hSizeLabel.setBounds(50, 300, 150, 30);
-        //Input Hospital Size TextBox
-        JTextField hSizeInput;
-        hSizeInput = new JTextField();
-        hSizeInput.setBounds(225, 300, 150, 30);*/
-
         //Input Top K Hospital Size Label
         JLabel kSizeLabel;
         kSizeLabel = new JLabel("Input # of Top-K Hospitals: ");
@@ -133,6 +122,7 @@ public class ProgramGUI {
         JTextField kSizeInput;
         kSizeInput = new JTextField();
         kSizeInput.setBounds(225, 275, 150, 30);
+
         //Output File Label
         JLabel outputLabel;
         outputLabel = new JLabel("Output File Name: ");
@@ -159,8 +149,9 @@ public class ProgramGUI {
 
                     boolean checkIsMac = outputDirectory.contains("/");
                     String pathStr = checkIsMac ? "/" : "\\";
+                    String addDirectorySrc = "src";
                     String addDirectory = "Output";
-                    addDirectory = pathStr + addDirectory + pathStr;
+                    addDirectory = pathStr +addDirectorySrc+pathStr+ addDirectory + pathStr;
 
                     //Create a Directory to store output files "/Output"
                     File outputDir = new File(outputDirectory +  addDirectory);
@@ -176,8 +167,6 @@ public class ProgramGUI {
                         programTextArea.append("File already exists.");
                     }
 
-
-
                     programTextArea.append("Node #: "+N+" "+"Top-K Hospital #: "+ K+"\n\n");
                     //To add the link to the BFS.java when completed
 
@@ -188,9 +177,10 @@ public class ProgramGUI {
                         programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
                         selectedAlgoOption = 0;
                         System.out.println("Selected Algo 1");
+
                     }
                     else if (algo2.isSelected()){
-                        programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
+                        programTextArea.append("Running Algorithm - "+algo2.getText()+"\n\n");
                         selectedAlgoOption = 1;
                         System.out.println("Selected Algo 2");
                     }
@@ -198,7 +188,6 @@ public class ProgramGUI {
                     {
                         programTextArea.append("Kindly select the algorithm."+"\n\n");
                     }
-
 
                     System.out.println("Num of Nodes: " + N);
                     YJ BFS = new YJ(Integer.parseInt(N));
@@ -229,33 +218,6 @@ public class ProgramGUI {
             }
         });
 
-/*        //Save output Button
-        JButton saveOutputButton = new JButton("Save as File");
-        saveOutputButton.setBounds(425, 450, 150, 30);
-        saveOutputButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    O = outputFile.getText();
-                    //Add file name inside File()
-                    File outputFile = new File(O+".txt");
-
-                    FileWriter fileWriter = new FileWriter("C:/Users/monai/OneDrive/Documents/Github/src/"+outputFile);
-                    fileWriter.write(programTextArea.getText());
-                    fileWriter.close();
-
-                    //To store to the path....TBC
-                    if (outputFile.createNewFile()) {
-                        System.out.println("File created: " + O);
-                    } else {
-                        System.out.println("File already exists.");
-                    }
-                } catch (IOException e1) {
-                    System.out.println("An error occured. File cannot be created");
-                    e1.printStackTrace();
-                }
-            }
-        });*/
         //Program Run Label
         JLabel programLabel;
         programLabel = new JLabel("Program Run: ");
@@ -264,8 +226,6 @@ public class ProgramGUI {
         //Program Run Display (TextArea + ScrollPane)
         programTextArea = new JTextArea();
         programTextArea.setBounds(650, 45, 475, 450);
-        //programTextArea.setWrapStyleWord(true);
-        //programTextArea.setLineWrap(true);
         JScrollPane scrollablePTextArea = new JScrollPane(programTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollablePTextArea.setBounds(650,45,475,460);
 
@@ -278,6 +238,7 @@ public class ProgramGUI {
         frame.add(hospitalFButton);
         frame.add(algoLabel);
         frame.add(algo1);
+        frame.add(algo2);
         frame.add(nSizeLabel);
         frame.add(nSizeInput);
         frame.add(kSizeLabel);
@@ -286,13 +247,7 @@ public class ProgramGUI {
         frame.add(outputLabel);
         frame.add(outputFile);
         frame.add(programLabel);
-        frame.add(algo2);
         frame.add(scrollablePTextArea);
-/*        //frame.add(hSizeLabel);
-        //frame.add(hSizeInput);
-        //frame.add(programTextArea);
-        //frame.getContentPane().add(scrollablePTextArea);
-        // frame.add(saveOutputButton);*/
         frame.setLayout(null);
         frame.setVisible(true);
 

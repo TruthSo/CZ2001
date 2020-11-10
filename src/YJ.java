@@ -40,13 +40,10 @@ public class YJ {
     private void RoadGraphInit(){
 
         // <Key,ArrayList<>> = <i_generated, <FromNodeId,<ToNodeIds>>>
-
         //HashMap<Integer,HashMap<Integer,ArrayList<Integer>>> test = new HashMap<Integer,HashMap<Integer,ArrayList<Integer>>>();
-
 
         HashMap<Integer,ArrayList<Integer>> test = new HashMap<Integer,ArrayList<Integer>>();
         var RoadNodesArr = getRoadNodes().keySet().toArray();
-
 
         for(int i = 0; i < getRoadNodes().size();i++){
 
@@ -164,7 +161,6 @@ public class YJ {
         }
     }
 
-
     private void findTopK(HashMap<Integer,LinkedList<Integer>> adj, int k){
         //ArrayList<String> stpList = new ArrayList<String>();
         HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
@@ -243,11 +239,9 @@ public class YJ {
             pred[i] = -1;
         }
 
-
         visited[src] = true;
         dist[src] = 0;
         queue.add(src);
-
 
         while (!queue.isEmpty()) {
             int u = queue.remove();
@@ -257,7 +251,6 @@ public class YJ {
                     dist[adj.get(u).get(i)] = dist[u] + 1;
                     pred[adj.get(u).get(i)] = u;
                     queue.add(adj.get(u).get(i));
-
 
                     if (adj.get(u).get(i) == dest)
                         return true;
@@ -322,7 +315,6 @@ public class YJ {
     public static int getRandomInteger(int maximum, int minimum){
         return ((int) (Math.random()*(maximum - minimum))) + minimum;
     }
-
 
     //============ Getter & Setter
 
