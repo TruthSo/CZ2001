@@ -17,7 +17,6 @@ public class YJ {
     private HashMap<Integer, ArrayList<Integer>> RoadNodes;
     private HashMap<Integer,HashMap<Integer,ArrayList<Integer>>> specialNodes;
 
-
     //========== Functions Declaration ==========
 
     public YJ(int vertices) {
@@ -191,11 +190,11 @@ public class YJ {
             boolean checkEmptyPath = en.getValue() != 0;
 
             if(checkEmptyPath){
-                String HospitalLabel = "hospital NodeId [" + en.getKey() + "]";
-                pathOutput += HospitalLabel + "\n[";
+                String HospitalLabel = "Hospital NodeId [" + en.getKey() + "]";
+                pathOutput += HospitalLabel + "\n\n[";
 
                 System.out.println(HospitalLabel);
-                System.out.print("[");
+                System.out.print("[\n\n");
 
                 for(int rv = inversedList.size() - 1; rv >= 0; rv--){
                     if(rv == 0){
@@ -209,7 +208,7 @@ public class YJ {
                 }
 
                 String label_end = "]\n";
-                String label_endB = "===================";
+                String label_endB = "===================\n";
 
                 pathOutput+= label_end;
                 pathOutput+= label_endB;
@@ -224,7 +223,7 @@ public class YJ {
         }
 
         if(outputFileStr.size() == 0){
-            outputFileStr.add("empty path ! Please tranverse the program again.");
+            outputFileStr.add("The path is empty! Please traverse the program again.\n\n");
         }
     }
 
@@ -281,12 +280,12 @@ public class YJ {
             crawl = pred[crawl];
         }
 
-        System.out.println("\nPath length is: " + dist[dest]);
+        System.out.println("\nPath length is: " + dist[dest]+"\n");
         System.out.println("Path is :");
         for (int i = path.size() - 1; i >= 0; i--) {
             System.out.print(path.get(i) + " ");
         }
-        System.out.println("\n---------------");
+        System.out.println("\n---------------\n\n");
         return path;
     }
 

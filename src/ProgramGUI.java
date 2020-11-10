@@ -133,12 +133,16 @@ public class ProgramGUI {
         outputFile.setBounds(225, 325, 150, 30);
 
         //Generate Algorithm with user input
-        JButton transverseButton = new JButton("Transverse");
-        transverseButton.setBounds(425,375,150,30);
-        transverseButton.addActionListener(new ActionListener() {
+        JButton traverseButton = new JButton("Traverse");
+        traverseButton.setBounds(425,375,150,30);
+        traverseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    //Start time
+                    long start = System.currentTimeMillis();
+
+                    //Get user input
                     N= nSizeInput.getText();
                     K= kSizeInput.getText();
                     O =outputFile.getText();
@@ -146,7 +150,7 @@ public class ProgramGUI {
                     //Add file name inside File()
                     File outputFile = new File(O+".txt");
 
-
+                    //Check file path
                     boolean checkIsMac = outputDirectory.contains("/");
                     String pathStr = checkIsMac ? "/" : "\\";
                     String addDirectorySrc = "src";
@@ -171,29 +175,28 @@ public class ProgramGUI {
                     //To add the link to the BFS.java when completed
 
                     int selectedAlgoOption = -1;
+
+                    System.out.println("Num of Nodes: " + N);
+                    YJ BFS = new YJ(Integer.parseInt(N));
+
                     if(algo1.isSelected())
                     {
                         //To call out the algo1.java class
                         programTextArea.append("Running Algorithm - "+algo1.getText()+"\n\n");
                         selectedAlgoOption = 0;
                         System.out.println("Selected Algo 1");
-
                     }
                     else if (algo2.isSelected()){
                         programTextArea.append("Running Algorithm - "+algo2.getText()+"\n\n");
                         selectedAlgoOption = 1;
                         System.out.println("Selected Algo 2");
+                        //Execute call out to function
+                        BFS.setRoadNodes(RoadNodes);
+
                     }
                     else
                     {
                         programTextArea.append("Kindly select the algorithm."+"\n\n");
-                    }
-
-                    System.out.println("Num of Nodes: " + N);
-                    YJ BFS = new YJ(Integer.parseInt(N));
-
-                    if(algo2.isSelected()){
-                        BFS.setRoadNodes(RoadNodes);
                     }
 
                     BFS.setSource(0);  //Set the source NodeId
@@ -209,6 +212,11 @@ public class ProgramGUI {
                         programTextArea.append(output);
                         fileWriter.write(output);
                     }
+                    //Stop time
+                    long stop = System.currentTimeMillis();
+                    //Print time
+                    System.out.println("Time Taken (ms): " + (stop - start));
+                    programTextArea.append("\n" + "Time Taken (ms): " + (stop - start) + "\n\n\n");
                     fileWriter.close();
                 }
                 catch(IOException e1){
@@ -243,7 +251,7 @@ public class ProgramGUI {
         frame.add(nSizeInput);
         frame.add(kSizeLabel);
         frame.add(kSizeInput);
-        frame.add(transverseButton);
+        frame.add(traverseButton);
         frame.add(outputLabel);
         frame.add(outputFile);
         frame.add(programLabel);
