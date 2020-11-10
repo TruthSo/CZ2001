@@ -367,15 +367,8 @@ public class YJ {
         return outputFileStr;
     }
 
-    public void setOutputFileStr(ArrayList<String> outputFileStr) {
-        this.outputFileStr = outputFileStr;
-    }
-
     public HashMap<Integer, HashMap<Integer, ArrayList<Integer>>> getSpecialNodes() {
         return specialNodes;
     }
-
-    public void setSpecialNodes(HashMap<Integer, HashMap<Integer, ArrayList<Integer>>> specialNodes) {
-        this.specialNodes = specialNodes;
-    }
+    
 }
